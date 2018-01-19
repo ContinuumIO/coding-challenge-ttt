@@ -1,0 +1,7 @@
+name: coding-challenge-ttt
+channels:
+- defaults
+dependencies:
+- nodejs
+- python=3.5.2
+- tornado=4.4.2
