@@ -44,7 +44,7 @@ class GameByIDHandler(RequestHandler):
             self.set_status(404)
         else:
             game_data = json.loads(self.request.body.decode('utf-8'))
-            game_instance = Game(**game_data)
+            game_instance = Game(_id=game_id, **game_data)
             _REGISTRY.add(game_instance)
             self.write(game_instance.to_json())
 

@@ -12,7 +12,7 @@ def build_ui():
     previous_dir = os.getcwd()
     os.chdir(os.path.join(os.path.dirname(__file__), "ui"))
     logging.info("Building UI assets")
-    subprocess.call(["npm", "run", "build"])
+    subprocess.call(["npm", "run", "build"], shell=True)
     os.chdir(previous_dir)
 
 
