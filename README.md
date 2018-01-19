@@ -33,11 +33,10 @@ Since this is an UI coding challenge, the success of your mission depends on bui
 
 ## Technologies
 
-We ask that you implement the game using Javascript and CSS or
-[SCSS](http://sass-lang.com/) but you may otherwise choose the libraries you like.
+We ask that you implement the game using Javascript/Typescript and [SCSS](http://sass-lang.com/)/CSS but you may otherwise choose the libraries you like.
 
-We prefer [Typescript](https://www.typescriptlang.org/) but you can also just right plain JS. 
-You can certainly use any framework you prefer. However, we'd
+We prefer [Typescript](https://www.typescriptlang.org/) but you can also write plain JS. 
+You can use any framework you prefer. However, we'd
 appreciate it if you didn't use other compile-to-JS options such as
 Coffeescript, Clojurescript, Elm, or Dart.
 
