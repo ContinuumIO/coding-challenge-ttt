@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "outDir": "../static",
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noEmitOnError": true,
+        "noImplicitAny": false,
+        "noUnusedLocals": false,
+        "newLine": "LF",
+        "lib": ["es5", "es6", "dom"],
+        "allowJs": true
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
