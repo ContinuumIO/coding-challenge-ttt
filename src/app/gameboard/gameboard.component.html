@@ -1,26 +1,30 @@
-<div class="fill" *ngIf="gameState.playersReady"> <!-- ENCAPSULATES THE BOARD -->
-    <div class="row h-33" *ngFor="let row of gameState.board; let r = index">
-        <div class="col-4 gb-cell border rounded"
-            [ngClass]="{'x-cell' : gameState.board[r][c]==1,'o-cell' : gameState.board[r][c]==0 }"
-            *ngFor="let cell of row; let c = index"
-            (click)="placeMarker(r, c)">
-            <div class="text-center"><i *ngIf="gameState.board[r][c]==1" class="fas fa-times fa-9x"></i></div>
-            <div class="text-center"><i *ngIf="gameState.board[r][c]==0" class="far fa-circle fa-9x"></i></div>
+<div class="container h-75">
+    <turn-indicator></turn-indicator>
+    <div class="fill" *ngIf="gameState.playersReady"> <!-- ENCAPSULATES THE BOARD -->
+        <div class="row h-33" *ngFor="let row of gameState.board; let r = index">
+            <div class="col-4 gb-cell border rounded"
+                [ngClass]="{'x-cell' : gameState.board[r][c]==1,'o-cell' : gameState.board[r][c]==0 }"
+                *ngFor="let cell of row; let c = index"
+                (click)="placeMarker(r, c)">
+                <div class="text-center"><i *ngIf="gameState.board[r][c]==1" class="fas fa-times fa-7x"></i></div>
+                <div class="text-center"><i *ngIf="gameState.board[r][c]==0" class="far fa-circle fa-7x"></i></div>
+            </div>
         </div>
     </div>
-</div>
-<div id="player-select" class="fill" *ngIf="!gameState.playersReady">
-    <div class="col-md-12 p-3 border rounded">
-        <form>
-            <div class="form-group">
-                <label for="playerX-name-input">Player X</label>
-                <input class="form-control" id="playerX-name-input" [(ngModel)]="playerXName" name="playerXName" placeholder="PLAYER X">
-            </div>
-            <div class="form-group">
-                <label for="playerO-name-input">Player O</label>
-                <input class="form-control" id="playerO-name-input" [(ngModel)]="playerOName" name="playerOName" placeholder="PLAYER O">
-            </div>
-            <button type="submit" (click)="startGame()" class="btn btn-primary">Let's Toe!</button>
-        </form>
+    <div id="player-select" class="fill" *ngIf="!gameState.playersReady">
+        <div class="col-md-12 p-3 border rounded">
+            <form>
+                <div class="form-group">
+                    <label for="playerX-name-input">Player 1</label>
+                    <input class="form-control" id="playerX-name-input" [(ngModel)]="playerXName" name="playerXName" placeholder="PLAYER 1">
+                </div>
+                <div class="form-group">
+                    <label for="playerO-name-input">Player 2</label>
+                    <input class="form-control" id="playerO-name-input" [(ngModel)]="playerOName" name="playerOName" placeholder="PLAYER 2">
+                </div>
+                <button type="submit" (click)="startGame()" class="btn btn-primary">Let's Toe!</button>
+                <button type="submit" (click)="gameExplorer()" class="btn btn-primary">Explore Games!</button>
+            </form>
+        </div>
     </div>
 </div>

@@ -66,6 +66,7 @@ export class GameStateService {
               if(response.value) {
                   this.startNewGame(this.player1.name, this.player2.name);
               } else {
+                  this.turnCount = undefined;
                   this.resetPlayers();
               }
           });
@@ -81,7 +82,8 @@ export class GameStateService {
               if(response.value) {
                   this.startNewGame(this.player1.name, this.player2.name);
               } else {
-                  // reset for new players?
+                  this.turnCount = undefined;
+                  this.resetPlayers();
               }
           })
       }
