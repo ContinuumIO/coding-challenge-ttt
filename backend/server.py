@@ -14,6 +14,12 @@ class IndexHandler(RequestHandler):
 
 
 class GameListHandler(RequestHandler):
+
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Methods", "GET,PUT,POST")
+        self.set_header("Access-Control-Allow-Headers", "Content-Type, User-Agent, X-Requested-With, X-Requested-By, Cache-Control")
+
     def get(self):
         """List all known games"""
         self.write({"data": [g.to_json() for g in _REGISTRY.list()]})
@@ -29,6 +35,7 @@ class GameListHandler(RequestHandler):
 
 
 class GameByIDHandler(RequestHandler):
+
     def get(self, game_id):
         """Return a game based on its ID"""
         game = _REGISTRY.get(game_id)
@@ -54,7 +61,7 @@ CURRENT_DIR = os.path.dirname(__file__)
 
 def run(port=8080, debug=False, **kwargs):
     handlers = [
-        (r"/", IndexHandler),
+        # (r"/", IndexHandler),
         (r"/api/games/?", GameListHandler),
         (r"/api/games/([^/]+)/?", GameByIDHandler),
     ]

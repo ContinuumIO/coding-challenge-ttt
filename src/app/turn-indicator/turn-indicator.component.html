@@ -1,0 +1,6 @@
+<div class="alert"
+    [ngClass]="{'x-turn-alert' : gameState.currentPlayer.mark == 1, 'o-turn-alert' : gameState.currentPlayer.mark == 0}"
+    role="alert"
+    *ngIf="gameState.currentPlayer && gameState.turnCount > 1">
+  Time to make your mark {{gameState.currentPlayer.name}}!
+</div>

@@ -1,0 +1,24 @@
+.gb-cell {
+    background-color: rgba(187, 183, 183, 1);
+}
+
+.gb-cell div {
+    margin-top: 10%;
+}
+
+// .gb-square:not(.x-cell):not(.o-cell):hover {
+//     background-color: green;
+// }
+
+.x-cell {
+    background-color: rgb(255, 73, 73) !important;
+}
+
+.o-cell {
+    background-color: rgba(81, 163, 247, 0.71) !important;
+}
+
+#player-select div {
+    top : 25%;
+    background-color: white;
+}
