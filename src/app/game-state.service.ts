@@ -21,13 +21,6 @@ export class GameStateService {
 
       this.currentPlayer = this.player1;
 
-    this.gamesApi.createGame()
-    .subscribe(response => {
-        console.log(response);
-    }, err => {
-        console.log(err);
-    });
-
       // local stuff for now
       this.resetBoard();
       this.playersReady = true;
@@ -55,6 +48,7 @@ export class GameStateService {
       this.board[r][c] = this.currentPlayer.mark;
       // check for a win
       if(this.isWin()){
+          this.saveGame();
          // Sweet Alert to indicate a Win
           swal({
               type : 'success',
@@ -98,6 +92,16 @@ export class GameStateService {
       } else {
           this.currentPlayer = this.player1;
       }
+  }
+
+  saveGame() : void {
+      var flattenedBoard = [].concat.apply([], this.board);
+      this.gamesApi.saveGame([this.player1.name, this.player2.name], flattenedBoard)
+      .subscribe(response => {
+          console.log(response);
+      }, err => {
+          console.log(err);
+      });
   }
 
   // Kicker for win state checking
