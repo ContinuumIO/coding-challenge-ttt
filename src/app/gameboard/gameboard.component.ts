@@ -2,29 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { GameStateService } from '../game-state.service';
 import swal from 'sweetalert2/dist/sweetalert2.all.min.js'
 import { GamesApiService } from '../games-api.service';
+import { Router } from '@angular/router';             // Add this
 
 @Component({
   selector: 'gameboard',
   templateUrl: './gameboard.component.html',
   styleUrls: ['./gameboard.component.scss']
 })
-export class GameboardComponent implements OnInit {
+export class GameboardComponent {
 
   private exploreGames : boolean;
   private playerXName : string;
   private playerOName : string;
 
-  constructor(private gamesApi : GamesApiService, private gameState : GameStateService) { }
-
-  ngOnInit() {
-      this.gamesApi.listGames()
-      .subscribe(response => {
-          console.log(response);
-      })
-  }
+  constructor(private gamesApi : GamesApiService, private gameState : GameStateService, private router: Router) { }
 
   gameExplorer() : void {
-      this.gameState.exploreGames = true;
+     this.router.navigate(['/game-explorer']);
   }
 
   startGame() : void {

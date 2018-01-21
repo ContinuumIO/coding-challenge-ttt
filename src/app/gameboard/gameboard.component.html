@@ -16,13 +16,16 @@
             <form>
                 <div class="form-group">
                     <label for="playerX-name-input">Player 1</label>
-                    <input class="form-control" id="playerX-name-input" [(ngModel)]="playerXName" name="playerXName" placeholder="PLAYER 1">
+                    <input required class="form-control" id="playerX-name-input" maxlength="16" [(ngModel)]="playerXName" name="playerXName" placeholder="PLAYER 1">
                 </div>
                 <div class="form-group">
                     <label for="playerO-name-input">Player 2</label>
-                    <input class="form-control" id="playerO-name-input" [(ngModel)]="playerOName" name="playerOName" placeholder="PLAYER 2">
+                    <input required class="form-control" id="playerO-name-input" maxlength="16" [(ngModel)]="playerOName" name="playerOName" placeholder="PLAYER 2">
                 </div>
-                <button type="submit" (click)="startGame()" class="btn btn-primary">Let's Toe!</button>
+                <button type="submit" (click)="startGame()" class="btn btn-primary"
+                        [disabled]="!playerXName || playerXName.length == 0 || !playerOName || playerOName.length == 0">
+                        Let's Toe!
+                </button>
                 <button type="submit" (click)="gameExplorer()" class="btn btn-primary">Explore Games!</button>
             </form>
         </div>

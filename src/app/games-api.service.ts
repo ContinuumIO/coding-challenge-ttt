@@ -23,7 +23,7 @@ export class GamesApiService {
                  httpOptions);
   }
 
-  listGames() : Observable<object> {
+  listGames() : Observable<any> {
       return this.http.get(this.apiUrl+"/games/");
   }
 
