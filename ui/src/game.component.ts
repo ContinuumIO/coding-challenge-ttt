@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
@@ -18,7 +18,7 @@ declare var $:any;
     templateUrl: './game.component.html',
     styleUrls: ['./game.component.scss']
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, OnDestroy {
 
     /*
      * The name of the winning player
@@ -55,6 +55,16 @@ export class GameComponent implements OnInit {
      */
     playerTwoActive:boolean;
 
+    /*
+     * A reference to the Observable
+     */
+    eventHandler;
+
+    /*
+     * A reference to the Observable
+     */
+    apiListener;
+
     constructor(public usersService:UsersService,
                 private eventService:EventService,
                 private gameService:GameService,
@@ -83,7 +93,9 @@ export class GameComponent implements OnInit {
 
     ngOnInit():void {
         // register some event listeners
-        this.eventService.handle().subscribe(event => {
+        this.eventHandler = this.eventService.handle().subscribe(event => {
+            if (this.gameService.loadingSavedGame) return;
+
             switch(event.event) {
                 case 'resetGame':
                     this.resetGame();
@@ -102,7 +114,8 @@ export class GameComponent implements OnInit {
 
         // check if this route was navigated to from a saved game
         if (this.gameService.getSelectedGame()) {
-            this.apiService.getGame(this.gameService.getSelectedGame()).subscribe(response => {
+            this.gameService.loadingSavedGame = true;
+            this.apiListener = this.apiService.getGame(this.gameService.getSelectedGame()).subscribe(response => {
                 this.usersService.setPlayerOne(response["data"].attributes.players[0].name);
                 this.usersService.setPlayerTwo(response["data"].attributes.players[1].name);
                 let tmpGameBoard = response["data"].attributes.board;
@@ -111,6 +124,7 @@ export class GameComponent implements OnInit {
                     tile.active = tmpGameBoard[tile.id - 1] !== null;
                     this.gameStats(tile);
                 });
+                this.gameService.loadingSavedGame = false;
             },
             err => {
                 // handle error here, but not now.
@@ -235,7 +249,6 @@ export class GameComponent implements OnInit {
      * @param conclusion String of either 'win' or 'draw'
      */
     openGameCompleteDialog(conclusion):void {
-        console.log('openGameCompleteDialog()');
         let dialogRef = this.dialog.open(GameCompleteDialogComponent, {
             width: '300px',
             data: conclusion === 'win' ? { text: this.winner } : { text: 'draw'}
@@ -258,5 +271,13 @@ export class GameComponent implements OnInit {
         });
         this.gameComplete = true;
         this.openGameCompleteDialog('draw');
+    }
+
+    ngOnDestroy():void {
+        this.eventHandler.unsubscribe();
+        if (this.apiListener) {
+            this.apiListener.unsubscribe();
+        }
+
     }
 }
