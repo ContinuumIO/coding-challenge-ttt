@@ -6,12 +6,18 @@
                 <th scope="col">#</th>
                 <th scope="col">Player X</th>
                 <th scope="col">Player O</th>
+                <th scope="col">Preview</th>
             </thead>
             <tbody>
                 <tr *ngFor="let game of games; let rowNum = index">
                     <th scope="row">{{rowNum +1}}</th>
                     <td>{{game.attributes.players[0]}}</td>
                     <td>{{game.attributes.players[1]}}</td>
+                    <td>
+                        <div>{{game.attributes.board[0]}} {{game.attributes.board[1]}} {{game.attributes.board[2]}}</div>
+                        <div>{{game.attributes.board[3]}} {{game.attributes.board[4]}} {{game.attributes.board[5]}}</div>
+                        <div>{{game.attributes.board[6]}} {{game.attributes.board[7]}} {{game.attributes.board[8]}}</div>
+                    </td>
                 </tr>
             </tbody>
         </table>

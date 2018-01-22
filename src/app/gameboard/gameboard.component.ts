@@ -29,6 +29,10 @@ export class GameboardComponent {
       this.gameState.startNewGame(this.playerXName, this.playerOName);
   }
 
+  saveGame() : void {
+      this.gameState.saveGame();
+  }
+
   placeMarker(r, c) : void {
       this.gameState.placePlayerMarker(r, c);
   }
