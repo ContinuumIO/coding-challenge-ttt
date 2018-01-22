@@ -11,7 +11,6 @@ export class GameCompleteDialogComponent {
     constructor(public dialogRef: MatDialogRef<GameCompleteDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any) {
 
-            console.log('dialog data',data);
         }
 
         /**

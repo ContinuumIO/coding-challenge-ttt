@@ -6,6 +6,11 @@ import { EventService } from './event.service';
 export class GameService {
 
     /**
+     * A flag to declare that a saved game is reloading
+     */
+    loadingSavedGame:boolean;
+
+    /**
      * An array to store the list of saved games
      */
     gameList:Array<object>;
@@ -28,6 +33,7 @@ export class GameService {
             null,null,null,
         ];
         this.activeGame = null;
+        this.loadingSavedGame = false;
     }
 
     /**
@@ -76,7 +82,10 @@ export class GameService {
      */
     updateGameBoard(tile) {
         this.gameBoard[tile.id-1] = tile.player;
-        this.gameStatus();
+        if (!this.loadingSavedGame){
+            this.gameStatus();
+        }
+
     }
 
     /**
@@ -135,7 +144,6 @@ export class GameService {
      * @param tiles  The tiles that are in the winning series.
      */
     win(player, tiles):void {
-        console.log('gameService::win()');
         this.eventService.dispatch({event:'gameOver',player:player,tiles:tiles});
     }
 

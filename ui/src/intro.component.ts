@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { UtilsService } from './utils.service';
@@ -12,7 +12,7 @@ import { GameService } from './game.service';
     templateUrl: './intro.component.html',
     styleUrls: ['intro.component.scss']
 })
-export class IntroComponent implements OnInit {
+export class IntroComponent implements OnInit, OnDestroy {
 
     /**
      * A flag to declare if a new game is going to start
@@ -39,6 +39,16 @@ export class IntroComponent implements OnInit {
      */
     gameList:Array<any>;
 
+    /**
+     * A variable to hold a reference ot the event listener
+     */
+    eventListener:any;
+
+    /**
+     * A variable to hold a reference to the event listener
+     */
+    apiListener:any;
+
     constructor(private apiService:ApiService,
                 private utilsService:UtilsService,
                 private usersService:UsersService,
@@ -55,7 +65,7 @@ export class IntroComponent implements OnInit {
     }
 
     ngOnInit():void {
-        this.eventService.handle().subscribe(event => {
+        this.eventListener = this.eventService.handle().subscribe(event => {
             if(event.event === 'newGame') {
                 this.startNewGame();
             }
@@ -70,7 +80,7 @@ export class IntroComponent implements OnInit {
      * to this component and to the gameService.
      */
     getListOfGames():void {
-        this.apiService.getGames().subscribe(response => {
+        this.apiListener = this.apiService.getGames().subscribe(response => {
             this.gameList = response['data'];
             this.gameService.gameList = response['data'];
         }
@@ -112,6 +122,11 @@ export class IntroComponent implements OnInit {
      */
     startNewGame():void {
         this.newGame = true;
+    }
+
+    ngOnDestroy():void {
+        this.eventListener.unsubscribe();
+        this.apiListener.unsubscribe();
     }
 
 }
