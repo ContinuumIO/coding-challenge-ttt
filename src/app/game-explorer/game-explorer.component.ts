@@ -3,6 +3,7 @@ import { GameStateService } from '../../services/game-state.service';
 import { GamesApiService } from '../../services/games-api.service';
 import { Router } from '@angular/router';
 
+// Component used to render the saved games list
 @Component({
   selector: 'game-explorer',
   templateUrl: './game-explorer.component.html',
@@ -25,7 +26,6 @@ export class GameExplorerComponent {
                   } else {
                       game.attributes.board[i] = 'N';
                   }
-
               }
           });
           this.games = response.data;

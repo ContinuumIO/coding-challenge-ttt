@@ -15,6 +15,23 @@
     </div>
     <div id="player-select" class="fill" *ngIf="!gameState.playersReady">
         <div class="col-md-12 p-3 border rounded">
+            <div>
+                <h2 class="text-center">RULES</h2>
+                <ul>
+                    <li>
+                        <span>Two Players Enter (thier names), only one may win!</span>
+                    </li>
+                    <li>
+                        <span>Players take turn placing thier marker 'X' or 'O' in a 3x3 grid</span>
+                    </li>
+                    <li>
+                        <span>A Player wins when they match 3 of thier marker in a row (Horizontal, Verticle, Diagonal)</span>
+                    </li>
+                    <li>
+                        <span>Good luck and have fun!</span>
+                    </li>
+                </ul>
+            </div>
             <form>
                 <div class="form-group">
                     <label for="playerX-name-input">Player 1</label>

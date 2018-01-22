@@ -4,6 +4,7 @@ import swal from 'sweetalert2/dist/sweetalert2.all.min.js'
 import { GamesApiService } from '../../services/games-api.service';
 import { Router } from '@angular/router';
 
+// Component used to render the Game board and Player selection
 @Component({
   selector: 'gameboard',
   templateUrl: './gameboard.component.html',
