@@ -18,18 +18,22 @@ export class GameboardComponent {
 
   constructor(private gamesApi : GamesApiService, private gameState : GameStateService, private router: Router) { }
 
+  // Takes user to the games list page
   gameExplorer() : void {
      this.router.navigate(['/game-explorer']);
   }
 
+  // resets data to return to the player select
   goToPlayerSelect() : void {
       this.gameState.resetPlayers();
   }
 
+  // Kicker to start off a new game for the players from the player select
   startGame() : void {
       this.gameState.startNewGame(this.playerXName, this.playerOName);
   }
 
+  // Kicks off the save for a game in progress
   saveGame() : void {
       this.gameState.saveGameProgress();
   }

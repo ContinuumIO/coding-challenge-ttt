@@ -10,6 +10,8 @@ import 'rxjs/add/operator/catch';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'text/plain' })
 };
+
+// Service to handle API calles to the /games API
 @Injectable()
 export class GamesApiService {
 

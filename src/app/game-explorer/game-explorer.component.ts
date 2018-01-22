@@ -17,6 +17,7 @@ export class GameExplorerComponent {
       // Retrieving the list of saved games
       this.gamesApi.listGames()
       .subscribe(response => {
+          // Parsing the board to help the mini-preview be more human readable
           response.data.forEach(game => {
               for(let i=0;i<9;i++){
                   if(game.attributes.board[i] == 1) {

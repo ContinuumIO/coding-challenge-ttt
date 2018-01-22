@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { GamesApiService } from './games-api.service';
 import swal from 'sweetalert2'
 
+// Singleton service that carries the board/player states
+// Most board actions are invoked through here or by proxy
 @Injectable()
 export class GameStateService {
     private player1 : any;
@@ -173,6 +175,7 @@ export class GameStateService {
      return this.checkRows() || this.checkCols() || this.checkDiagonals();
   }
 
+  // Helper to quickly set the 2 players
   private setPlayers(player1, player2) {
       this.player1 = {name : player1, mark : 1};
       this.player2 = {name : player2, mark : 0};
