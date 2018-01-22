@@ -1,7 +1,7 @@
 <div id="game-explorer" class="container">
     <div *ngIf="games && games.length > 0">
         <button type="submit" (click)="goToPlayerSelect()" class="btn btn-primary">Return to Player Select!</button>
-        <table id="game-explorer-list" class="table table-striped">
+        <table id="game-explorer-list" class="table table-striped table-hover">
             <thead>
                 <th scope="col">#</th>
                 <th scope="col">Player X</th>
@@ -9,7 +9,7 @@
                 <th scope="col">Preview</th>
             </thead>
             <tbody>
-                <tr *ngFor="let game of games; let rowNum = index" (click)="viewGame(game.id)">
+                <tr *ngFor="let game of games; let rowNum = index" (click)="viewGame(game.id)" class="game-preview-row">
                     <th scope="row">{{rowNum +1}}</th>
                     <td>{{game.attributes.players[0]}}</td>
                     <td>{{game.attributes.players[1]}}</td>
