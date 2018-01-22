@@ -30,7 +30,7 @@ export class GameboardComponent {
   }
 
   saveGame() : void {
-      this.gameState.saveGame();
+      this.gameState.saveGameProgress();
   }
 
   placeMarker(r, c) : void {

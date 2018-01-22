@@ -7,6 +7,7 @@ export class GameStateService {
     private player1 : any;
     private player2 : any;
     board : [any];
+    gameId : string;
     currentPlayer : any;
     playersReady : boolean;
     turnCount : number;
@@ -21,7 +22,6 @@ export class GameStateService {
 
       this.currentPlayer = this.player1;
 
-      // local stuff for now
       this.resetBoard();
       this.playersReady = true;
   }
@@ -36,11 +36,12 @@ export class GameStateService {
   resetBoard() : void {
       this.board = [[null, null, null],
                     [null, null, null],
-                    [null, null, null]]
+                    [null, null, null]];
+      this.gameId = null;
   }
 
-  placePlayerMarker(r, c) : void {
 
+  placePlayerMarker(r, c) : void {
       // Blocks players from overwriting a previously chosen cell
       if(this.board[r][c] != null){
           return
@@ -49,28 +50,30 @@ export class GameStateService {
       this.board[r][c] = this.currentPlayer.mark;
       // check for a win
       if(this.isWin()){
-          this.saveGame();
-         // Sweet Alert to indicate a Win
-          swal({
-              type : 'success',
-              title : 'WINNER WINNER',
-              text : this.currentPlayer.name,
-              confirmButtonText : 'Play Again!',
-              showCancelButton : true,
-              cancelButtonText : 'New Players!',
-              confirmButtonClass: 'btn btn-success',
-              cancelButtonClass: 'btn btn-danger',
-              buttonsStyling : false
-          })
-          .then(response => {
-              // Confirmed play again
-              if(response.value) {
-                  this.startNewGame(this.player1.name, this.player2.name);
-              } else {
-                  this.turnCount = undefined;
-                  this.resetPlayers();
-              }
-          });
+
+          // Sweet Alert to indicate a Win
+           swal({
+               type : 'success',
+               title : 'WINNER WINNER',
+               text : this.currentPlayer.name,
+               confirmButtonText : 'Play Again!',
+               showCancelButton : true,
+               cancelButtonText : 'New Players!',
+               confirmButtonClass: 'btn btn-success',
+               cancelButtonClass: 'btn btn-danger',
+               buttonsStyling : false
+           })
+           .then(response => {
+               // Confirmed play again
+               if(response.value) {
+                   this.startNewGame(this.player1.name, this.player2.name);
+               } else {
+                   // reset board and return to player select
+                   this.turnCount = undefined;
+                   this.resetPlayers();
+               }
+           });
+
     // If still no wins, and 9 moves have been made then it is a tie
       } else if(this.turnCount >= 9) {
           swal({
@@ -96,14 +99,29 @@ export class GameStateService {
       }
   }
 
-  saveGame() : void {
-      var flattenedBoard = [].concat.apply([], this.board);
-      this.gamesApi.saveGame([this.player1.name, this.player2.name], flattenedBoard)
+  saveGameProgress() : any {
+      this.saveGame(this.gameId)
       .subscribe(response => {
-          console.log(response);
-      }, err => {
-          console.log(err);
-      });
+          this.gameId = response.id;
+          swal({
+              type : 'success',
+              title : 'Progress Saved!'
+          });
+      }, error => {
+          swal({
+              type : 'error',
+              title : 'Failed Saving progress!'
+          })
+      })
+  }
+
+  saveGame(gameId) : any {
+      var flattenedBoard = [].concat.apply([], this.board);
+      if(gameId) {
+          return this.gamesApi.updateGame(gameId,[this.player1.name, this.player2.name], flattenedBoard);
+      } else {
+          return this.gamesApi.saveGame([this.player1.name, this.player2.name], flattenedBoard);
+      }
   }
 
   // Kicker for win state checking

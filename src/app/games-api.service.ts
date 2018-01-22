@@ -23,6 +23,12 @@ export class GamesApiService {
                  httpOptions);
   }
 
+  updateGame(gameId, players, gameboard) : Observable<object> {
+      return this.http.post(this.apiUrl+"/games/" + gameId,
+                JSON.stringify({players : players, board : gameboard}),
+                 httpOptions);
+  }
+
   listGames() : Observable<any> {
       return this.http.get(this.apiUrl+"/games/");
   }
