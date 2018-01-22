@@ -1,0 +1,7 @@
+<div class="winner-title" *ngIf="data.text !== 'draw'">{{ data.text }} won!</div>
+<div class="winner-title" *ngIf="data.text === 'draw'">A Draw!</div>
+<div class="question">Do you want to play again?</div>
+<mat-dialog-actions>
+    <button mat-button (click)="playAgain()">Yes</button>
+    <button mat-button (click)="close()">No</button>
+</mat-dialog-actions>

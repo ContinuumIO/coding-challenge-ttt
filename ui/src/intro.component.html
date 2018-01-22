@@ -12,10 +12,12 @@
 
             <form class="form-inline">
                 <div class="form-group col-xs-12">
-                    <input #playerOneName class="form-control" type="text" placeholder="player one name"
-                    (keyup.enter)="savePlayerOne(playerOneName.value)">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="player one name" #playerOneName
+                            (keyup.enter)="savePlayerOne(playerOneName.value)">
+                    </mat-form-field>
                     <div class="button-container">
-                        <button
+                        <button mat-button
                         type="button"
                         class="btn btn-primary"
                         (click)="savePlayerOne(playerOneName.value)">Next</button>
@@ -27,10 +29,12 @@
 
             <form class="form-inline">
                 <div class="form-group col-xs-12">
-                    <input #playerTwoName class="form-control" type="text" placeholder="player two name"
-                    (keyup.enter)="savePlayerTwo(playerTwoName.value)">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="player two name" #playerTwoName
+                            (keyup.enter)="savePlayerTwo(playerTwoName.value)">
+                    </mat-form-field>
                     <div class="button-container">
-                        <button
+                        <button mat-button
                             type="button"
                             class="btn btn-primary"
                             (click)="savePlayerTwo(playerTwoName.value)">Next</button>
@@ -40,7 +44,7 @@
         </div>
         <div class="player-vs-player" *ngIf="usersService.getPlayerOne().name && usersService.getPlayerTwo().name">
             <div class="players">{{ usersService.getPlayerOne().name}} vs. {{ usersService.getPlayerTwo().name }}</div>
-            <button type="button" class="btn btn-success" name="button" (click)="startGame()">Play Game</button>
+            <button mat-button type="button" class="btn btn-success" name="button" (click)="startGame()">Play Game</button>
         </div>
     </div>
 </div>

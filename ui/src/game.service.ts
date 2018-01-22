@@ -135,6 +135,7 @@ export class GameService {
      * @param tiles  The tiles that are in the winning series.
      */
     win(player, tiles):void {
+        console.log('gameService::win()');
         this.eventService.dispatch({event:'gameOver',player:player,tiles:tiles});
     }
 

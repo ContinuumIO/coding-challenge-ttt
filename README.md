@@ -4,6 +4,8 @@ The Tic Tac Toe challenge application is a one-on-one tac tac toe game that allo
 
 I used Miniconda to setup the environment from the supplied `environment.yml` file. The `run.py` file was modified to bypass the ui build trigger and used `webpack-dev-server` to build, bundle and run the application locally.
 
+Since tic tac toe is a simple game to play, I wanted the design to be minimal as well. Material Design was used for this.
+
 ### Steps to run locally:
 
 1. check out the branch
@@ -19,6 +21,7 @@ I used Miniconda to setup the environment from the supplied `environment.yml` fi
 - Typescript (transpilation with `awesome-typescript-loader` webpack plugin)
 - Angular 5.2.0
 - Webpack 3.10
+- Angular Material (based off of Material Design)
 - Bootstrap 3.3.5 (SASS)
 - JQuery 3.3.1
 

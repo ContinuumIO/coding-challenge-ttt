@@ -1,0 +1,19 @@
+game-complete-component {
+    color: #63625f;
+    font-size: 14px;
+    width: 300px;
+    height: 200px;
+    text-align: center;
+
+    .winner-title {
+        font-size: 24px;
+    }
+
+    .question {
+        font-size: 16px;
+    }
+
+    .mat-dialog-actions {
+        justify-content: center;
+    }
+}
