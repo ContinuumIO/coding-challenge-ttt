@@ -23,7 +23,7 @@ define("skip-build", default=False, help="skip rebuilding UI", type=bool)
 
 if __name__ == '__main__':
     parse_command_line()
-    if not options.skip_build:
-        build_ui()
+    # if not options.skip_build:
+        # build_ui()
 
     server.run(**options.as_dict())

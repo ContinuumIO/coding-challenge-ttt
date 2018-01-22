@@ -1,0 +1,104 @@
+.intro-component {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+
+    .game-list-container {
+        // width: 75vw;
+        // height: 75vh;
+        padding:25px;
+        margin: 0 auto;
+
+        .game-list {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+    }
+
+    .player-forms {
+        display: flex;
+        justify-content: center;
+
+        padding-top: 25px;
+        width: 75vw;
+
+        .player-form {
+
+            width: 75vw;
+            display: flex;
+            justify-content: center;
+
+            input {
+                &:focus,
+                .focus {
+                    outline: none;
+                    box-shadow: none;
+                }
+            }
+
+            @media screen and (max-width: 768px) {
+                input {
+                    width: 75vw;
+                    margin-bottom: 10px;
+                }
+            }
+
+            .button-container {
+                display: inline-block;
+
+                button.btn {
+                    &:focus,
+                    .focus {
+                        box-shadow: none;
+                    }
+                }
+
+                @media screen and (max-width: 768px) {
+                    button.btn {
+                        width: 75vw;
+                    }
+                }
+            }
+        }
+
+        .player-vs-player {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Ubuntu';
+            font-size: 24px;
+            font-weight: 700;
+
+            .players {
+
+            }
+
+            @media screen and (max-width: 768px) {
+                .players {
+                    font-size: 5vw;
+                }
+
+                button.btn {
+                    width: 75vw;
+                }
+            }
+        }
+    }
+
+
+    .new-game-card {
+        display: inline-flex;
+        justify-content: center;
+        width: 200px;
+        height: 80px;
+        margin: 5px;
+
+        border: 1px solid #c6c9c7;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+}

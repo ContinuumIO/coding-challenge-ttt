@@ -1,0 +1,12 @@
+<div class="game-card">
+    <div class="players" *ngIf="players">
+        <span [ngClass]="playerOneMark">{{playerOneMark}}</span> {{ playerTitle }} <span [ngClass]="playerTwoMark">{{playerTwoMark}}</span>
+    </div>
+    <div class="mini-game-board" *ngIf="gameBoard" (click)="playGame()">
+        <div *ngFor="let tile of gameBoard; let i = index"
+            [class]="'mini-game-tile tile_'+(i + 1)+' player-icon '+tile">
+        </div>
+    </div>
+    <!-- <button *ngIf="gameBoard" type="button" name="button" class="btn btn-default">Play</button> -->
+    <span *ngIf="!gameBoard" (click)="startNewGame()"><i class="fa fa-plus"></i></span>
+</div>

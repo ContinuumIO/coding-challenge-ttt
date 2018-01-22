@@ -25,8 +25,8 @@ var loaders = [
   },
 
   // Support both Typescript and ES2015 Javascript
-  {test: /\.js$/, loader: 'babel-loader',
-   exclude: /(node_modules|bower_components)/, query: {presets: ['es2015']}},
+  // {test: /\.js$/, loader: 'babel-loader',
+  //  exclude: /(node_modules|bower_components)/, query: {presets: ['es2015']}},
   {
        test: /\.ts$/,
        use: [
@@ -43,25 +43,29 @@ var loaders = [
 var extensions = [".webpack.js", ".web.js", ".ts", ".js", ".scss"];
 
 module.exports = [{
-    // entry: './src/main.ts',
-  entry: {
-      polyfills: './src/polyfills.ts',
-      app: "./src/main.ts",
-      vendor: './src/vendor.ts',
-      angular: './src/angular.ts'
-  },
-  output: {
-    path: __dirname + "/static",
-    filename: "[name].js",
-    library: "coding-challenge-ttt",
-    libraryTarget: "umd",
-    umdNamedDefine: true,
-  },
-  resolve: {extensions: extensions},
-  module: {rules: loaders},
 
-  // local development server
-  devServer: {
+    // Entry Points ------------------------------------------------------------
+    entry: {
+        polyfills: './src/polyfills.ts',
+        app: "./src/main.ts",
+        vendor: './src/vendor.ts',
+        angular: './src/angular.ts'
+    },
+
+    // Outputted files and locations -------------------------------------------
+    output: {
+        path: __dirname + "/static",
+        filename: "[name].js"
+    },
+
+    // Path extension resolutions ----------------------------------------------
+    resolve: {extensions: extensions},
+
+    // Rules for handling file types -------------------------------------------
+    module: {rules: loaders},
+
+    // Local development server w/ HMR -----------------------------------------
+    devServer: {
         headers: {
             'Access-Control-Allow-Origin': '*'
         },
@@ -78,36 +82,58 @@ module.exports = [{
             }
         },
         hot: true
-  },
-  devtool: "source-map",
-  plugins: [
-      new CleanWebpackPlugin(['static']),
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.ProvidePlugin({
-         $: "jquery",
-         jquery: "jquery",
-         "window.jquery": "jquery",
-         jQuery: "jquery"
-      }),
-      new ExtractTextPlugin({
-          filename: "index.css"
-      }),
-      new HtmlWebpackPlugin({
-        //   template: '../backend/templates/index.html'
-          template: './src/index.html'
-      }),
+    },
+
+    // Source maps (slower but accurate version) -------------------------------
+    devtool: "source-map",
+
+    // Plugins -----------------------------------------------------------------
+    plugins: [
+        // clear out the output dir for a sparkling clean build
+        new CleanWebpackPlugin(['static']),
+
+        // let's the hot module replacement going on for the webpack-dev-server
+        new webpack.HotModuleReplacementPlugin(),
+
+        // declare providers for jQuery
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jquery: "jquery",
+            "window.jquery": "jquery",
+            jQuery: "jquery"
+        }),
+
+        // extract the embedded css into one file
+        new ExtractTextPlugin({
+            filename: "index.css",
+            disable: true
+        }),
+
+        // declare the index file to use to inject the bundles and css
+        // -- this was moved to the src folder rather than the backend dir.
+        new HtmlWebpackPlugin({
+            template: './src/index.html'
+        }),
+
+        // Workaround for angular/angular#11580
         new webpack.ContextReplacementPlugin(
             // /angular(\\|\/)core(\\|\/)@angular/,
             /\@angular(\\|\/)core(\\|\/)esm5/,
             path.join(__dirname, "./src")
         ),
+
+        // Tree-shake the javascript into bundles defined by the entry points
         new webpack.optimize.CommonsChunkPlugin({
             name: ['app', 'angular', 'vendor', 'polyfills']
         }),
-        // new webpack.optimize.CommonsChunkPlugin({
-        //     name: ['runtime']
-        // }),
-      new FriendlyErrorsPlugin()
 
-  ]
+        // Extract all shared code into the runtime bundle
+        new webpack.optimize.CommonsChunkPlugin({
+            name: ['runtime']
+        }),
+
+        // Output friendly errors because errors make us sad and then is friendly
+        new FriendlyErrorsPlugin()
+
+    ]
 }];

@@ -1,3 +1,13 @@
-<div class="game-board">
-    Welcome to Tic Tac Toe YO JOE
+<div class="header">
+    <div class="title">
+        Tic Tac Toe
+    </div>
+    <div class="actions" *ngIf="playRoute">
+        <div><span class="fa fa-refresh"></span><a (click)="resetGame()">restart</a></div>
+        <div><span class="fa fa-certificate"></span><a (click)="newGame()">new game</a></div>
+        <div><span class="fa fa-floppy-o"></span><a (click)="saveGame()">save game</a></div>
+    </div>
+</div>
+<div class="content">
+    <router-outlet></router-outlet>
 </div>
