@@ -68,13 +68,13 @@ export class GameStateService {
              this.currentPlayer = this.player2;
          }
          this.turnCount = xCount+oCount;
-     } error => {
+     }, error => {
          swal({
              type : 'error',
              title : 'Failed loading game!'
          })
          .then(() => {
-             resetPlayers();
+             this.resetPlayers();
          })
      });
   }

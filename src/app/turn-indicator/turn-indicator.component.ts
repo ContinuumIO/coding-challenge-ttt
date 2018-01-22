@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GameStateService } from '../game-state.service';
+import { GameStateService } from '../../services/game-state.service';
 
 @Component({
   selector: 'turn-indicator',

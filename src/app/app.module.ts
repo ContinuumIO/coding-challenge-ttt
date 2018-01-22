@@ -8,8 +8,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { GameboardComponent } from './gameboard/gameboard.component';
-import { GamesApiService } from './games-api.service';
-import { GameStateService } from './game-state.service';
+import { GamesApiService } from '../services/games-api.service';
+import { GameStateService } from '../services/game-state.service';
 import { TurnIndicatorComponent } from './turn-indicator/turn-indicator.component';
 import { GameExplorerComponent } from './game-explorer/game-explorer.component';
 

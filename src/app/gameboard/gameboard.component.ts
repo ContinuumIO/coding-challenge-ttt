@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { GameStateService } from '../game-state.service';
+import { GameStateService } from '../../services/game-state.service';
 import swal from 'sweetalert2/dist/sweetalert2.all.min.js'
-import { GamesApiService } from '../games-api.service';
+import { GamesApiService } from '../../services/games-api.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -33,6 +33,7 @@ export class GameboardComponent {
       this.gameState.saveGameProgress();
   }
 
+  // Calls function to place marker on board via GameStateService
   placeMarker(r, c) : void {
       this.gameState.placePlayerMarker(r, c);
   }

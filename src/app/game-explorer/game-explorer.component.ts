@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GameStateService } from '../game-state.service';
-import { GamesApiService } from '../games-api.service';
+import { GameStateService } from '../../services/game-state.service';
+import { GamesApiService } from '../../services/games-api.service';
 import { Router } from '@angular/router';
 
 @Component({
