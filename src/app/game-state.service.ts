@@ -19,7 +19,6 @@ export class GameStateService {
       this.turnCount = 1;
       this.setPlayers(playerX, playerO);
       this.currentPlayer = this.player1;
-
       this.resetBoard();
   }
 
@@ -46,6 +45,7 @@ export class GameStateService {
           this.gameId = game.id;
           this.setPlayers(game.attributes.players[0], game.attributes.players[1]);
 
+          // Counts to keep track of next players turn after loda
           let xCount = 0;
           let oCount = 0;
           let boardMarkCount = 0;
@@ -108,7 +108,6 @@ export class GameStateService {
                    this.startNewGame(this.player1.name, this.player2.name);
                } else {
                    // reset board and return to player select
-                   this.turnCount = undefined;
                    this.resetPlayers();
                }
            });
@@ -118,7 +117,12 @@ export class GameStateService {
           swal({
               type : 'warning',
               title : 'TIE GAME',
-              confirmButtonText : 'Play Again!'
+              confirmButtonText : 'Play Again!',
+              showCancelButton : true,
+              confirmButtonClass: 'btn btn-success',
+              cancelButtonClass: 'btn btn-danger',
+              cancelButtonText : 'New Players!',
+              buttonsStyling : false
           })
           .then(response => {
               // Confirmed play again
