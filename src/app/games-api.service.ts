@@ -17,6 +17,7 @@ export class GamesApiService {
 
   constructor(private http: HttpClient) { }
 
+
   saveGame(players, gameboard) : Observable<object> {
       return this.http.post(this.apiUrl+"/games/",
                 JSON.stringify({players : players, board : gameboard}),
@@ -33,7 +34,7 @@ export class GamesApiService {
       return this.http.get(this.apiUrl+"/games/");
   }
 
-  findGame(gameId) : Observable<object> {
+  findGame(gameId) : Observable<any> {
       return this.http.get(this.apiUrl+"/games/"+gameId);
   }
 

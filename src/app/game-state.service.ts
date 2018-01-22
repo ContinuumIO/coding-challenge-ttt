@@ -17,13 +17,10 @@ export class GameStateService {
   startNewGame(playerX, playerO) : void {
       // Initial setup for a new game, resetting players and turn count
       this.turnCount = 1;
-      this.player1 = {name : playerX, mark : 1};
-      this.player2 = {name : playerO, mark : 0};
-
+      this.setPlayers(playerX, playerO);
       this.currentPlayer = this.player1;
 
       this.resetBoard();
-      this.playersReady = true;
   }
 
   resetPlayers() : void {
@@ -38,6 +35,48 @@ export class GameStateService {
                     [null, null, null],
                     [null, null, null]];
       this.gameId = null;
+  }
+
+  resumeGame(gameId) : void {
+      this.gamesApi.findGame(gameId)
+      .subscribe(response => {
+          this.resetBoard();
+          // After getting the data, let's set everything up
+          let game = response.data;
+          this.gameId = game.id;
+          this.setPlayers(game.attributes.players[0], game.attributes.players[1]);
+
+          let xCount = 0;
+          let oCount = 0;
+          let boardMarkCount = 0;
+          // now set the board
+          for(let r=0;r < 3;r++){
+              for(let c=0;c< 3;c++) {
+                  this.board[r][c]=game.attributes.board[boardMarkCount];
+                  boardMarkCount++;
+                  if(this.board[r][c]==1){
+                      xCount++;
+                  } else if(this.board[r][c]==0){
+                      oCount++;
+                  }
+              }
+          }
+         // Determing which players turn it is after resume
+         if(xCount <= oCount){
+             this.currentPlayer = this.player1;
+         } else{
+             this.currentPlayer = this.player2;
+         }
+         this.turnCount = xCount+oCount;
+     } error => {
+         swal({
+             type : 'error',
+             title : 'Failed loading game!'
+         })
+         .then(() => {
+             resetPlayers();
+         })
+     });
   }
 
 
@@ -130,8 +169,14 @@ export class GameStateService {
      return this.checkRows() || this.checkCols() || this.checkDiagonals();
   }
 
+  private setPlayers(player1, player2) {
+      this.player1 = {name : player1, mark : 1};
+      this.player2 = {name : player2, mark : 0};
+      this.playersReady = true;
+  }
+
   // Checks the board rows for a win state
-  checkRows() : boolean {
+  private checkRows() : boolean {
       for(let row = 0;row < 3; row++) {
           let markCount = 0;
           for(let col = 0;col < 3; col++) {
@@ -147,7 +192,7 @@ export class GameStateService {
   }
 
   // Checks the board cols for a win state
-  checkCols() : boolean {
+  private checkCols() : boolean {
       for(let col = 0;col < 3; col++) {
           let markCount = 0;
           for(let row = 0;row < 3; row++) {
@@ -163,7 +208,7 @@ export class GameStateService {
   }
 
   // Checks the board for diagonal win states
-  checkDiagonals() : boolean {
+  private checkDiagonals() : boolean {
     if(this.board[0][0] == this.currentPlayer.mark
         && this.board[1][1] == this.currentPlayer.mark
         && this.board[2][2] == this.currentPlayer.mark) {

@@ -9,7 +9,7 @@
                 <th scope="col">Preview</th>
             </thead>
             <tbody>
-                <tr *ngFor="let game of games; let rowNum = index">
+                <tr *ngFor="let game of games; let rowNum = index" (click)="viewGame(game.id)">
                     <th scope="row">{{rowNum +1}}</th>
                     <td>{{game.attributes.players[0]}}</td>
                     <td>{{game.attributes.players[1]}}</td>

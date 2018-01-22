@@ -12,7 +12,7 @@ export class GameExplorerComponent {
 
   private games : [any];
 
-  constructor(private gamesApi : GamesApiService, private router: Router) {
+  constructor(private gamesApi : GamesApiService, private gameState : GameStateService, private router: Router) {
       // Retrieving the list of saved games
       this.gamesApi.listGames()
       .subscribe(response => {
@@ -33,6 +33,11 @@ export class GameExplorerComponent {
   }
 
   goToPlayerSelect() : void {
+      this.router.navigate(['/']);
+  }
+
+  viewGame(gameId) : void {
+      this.gameState.resumeGame(gameId);
       this.router.navigate(['/']);
   }
 
