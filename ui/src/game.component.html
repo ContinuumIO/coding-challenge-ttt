@@ -1,0 +1,25 @@
+<div class="game-board-players row">
+    <div class="playerOne pull-left" [ngClass]="{'active':playerOneActive}">
+        <span class="name">{{ usersService.getPlayerOne().name }}</span><span class="mark">{{ usersService.getPlayerOne().mark }}</span>
+    </div>
+    <div class="playerTwo pull-right" [ngClass]="{'active': playerTwoActive}">
+        <span class="name">{{ usersService.getPlayerTwo().name }}</span><span class="mark">{{ usersService.getPlayerTwo().mark }}</span>
+    </div>
+</div>
+<div class="game-board" [ngClass]="{'gameOver': gameComplete}">
+    <div *ngFor="let tile of tiles; let i = index"
+        [class]="'game-tile tile_'+(i + 1)"
+        [class.player-icon]="tile.player"
+        [class.x]="tile.player && tile.player === 'x'"
+        [class.o]="tile.player && tile.player === 'o'"
+        (click)="selectTile($event, tile)">
+    </div>
+</div>
+<div class="end-of-game-message" *ngIf="gameComplete">
+    <div class="win" *ngIf="gameComplete && gameWin">
+        <span>{{ winner }} WON!</span>
+    </div>
+    <div class="draw" *ngIf="gameComplete && gameDraw">
+        <span>DRAW!</span>
+    </div>
+</div>

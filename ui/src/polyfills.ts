@@ -1,3 +1,4 @@
+// Any polyfill library dependencies
 import 'core-js/client/shim.js';
 import 'core-js/es5';
 import 'core-js/es6';

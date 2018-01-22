@@ -1,3 +1,7 @@
+# Developer's Notes:
+
+
+
 # Anaconda: TicTacToe Coding Challenge
 
 Your mission, should you choose to accept it, is to implement a two-player game
@@ -35,7 +39,7 @@ Since this is an UI coding challenge, the success of your mission depends on bui
 
 We ask that you implement the game using Javascript/Typescript and [SCSS](http://sass-lang.com/)/CSS but you may otherwise choose the libraries you like.
 
-We prefer [Typescript](https://www.typescriptlang.org/) but you can also write plain JS. 
+We prefer [Typescript](https://www.typescriptlang.org/) but you can also write plain JS.
 You can use any framework you prefer. However, we'd
 appreciate it if you didn't use other compile-to-JS options such as
 Coffeescript, Clojurescript, Elm, or Dart.

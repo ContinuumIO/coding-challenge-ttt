@@ -1,0 +1,146 @@
+@import './_variables.scss';
+$tile-scalar: 25vmin;
+.game-board-players {
+    .playerOne {
+        display: inline-block;
+        opacity: 0.5;
+        &.active {
+            opacity: 1;
+        }
+
+        .name {
+            font-size: 20px;
+        }
+
+        .mark {
+            font-size: 29px;
+            font-weight: 400;
+            background: none;
+            padding: none;
+            color: $x-mark-color;
+        }
+    }
+    .playerTwo {
+        display: inline-block;
+        opacity: 0.5;
+        &.active {
+            opacity: 1;
+        }
+
+        .name {
+            font-size: 20px;
+        }
+
+        .mark {
+            font-size: 29px;
+            font-weight: 400;
+            background: none;
+            padding: none;
+            color: $o-mark-color;
+        }
+    }
+}
+
+.game-board {
+
+    &.gameOver {
+        opacity: 0.4;
+    }
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+    width: 450px;
+    width: $tile-scalar * 3;
+    height: 450px;
+    height: $tile-scalar * 3;
+
+    .game-tile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 150px;
+        width: $tile-scalar;
+        height: 150px;
+        height: $tile-scalar;
+
+        &.tile_1,
+        &.tile_2,
+        &.tile_4,
+        &.tile_5 {
+            border-right: 1px solid #b4b7ba;
+            border-bottom: 1px solid #b4b7ba;
+        }
+        &.tile_3,
+        &.tile_6 {
+            border-bottom: 1px solid #b4b7ba;
+        }
+        &.tile_7,
+        &.tile_8 {
+            border-right: 1px solid #b4b7ba;
+        }
+        &.tile_9 {
+
+        }
+
+        &.player-icon {
+            font-family: FontAwesome;
+            font-size: 95px;
+            font-size: 25vmin;
+            &.x {
+                &:before {
+                    content: "\f00d";
+                    // color: #289c56;
+                    color: $x-mark-color;
+                }
+            }
+            &.x-loser {
+                &:before {
+                    content: "\f00d";
+                    color: #dedede;
+                }
+            }
+
+            &.o {
+                &:before {
+                    content: "\f10c";
+                    color: $o-mark-color;
+                }
+            }
+            &.o-loser{
+                &:before {
+                    content: "\f10c";
+                    color: #dedede;
+                }
+            }
+
+        }
+
+        &.winner {
+            opacity: 1;
+        }
+
+        &.loser {
+            &:before {
+                color: #dedede;
+                opacity: 0.3;
+            }
+        }
+
+    }
+
+}
+.end-of-game-message {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    .win,
+    .draw {
+        font-size: 11vw;
+        font-weight: 400;
+    }
+}

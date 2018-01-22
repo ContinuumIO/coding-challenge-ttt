@@ -1,0 +1,99 @@
+@import './_variables.scss';
+.game-card {
+    cursor: pointer;
+    display: block;
+    text-align: center;
+
+    width: 200px;
+    height: 90px;
+    margin: 5px;
+
+    border: 1px solid #969693;
+    border-radius: 5px;
+
+    .players {
+        font-size: 20px;
+        font-weight: 400;
+        color: #9e9d9d;
+
+        .x {
+            color: $x-mark-color;
+        }
+
+        .o {
+            color: $o-mark-color;
+        }
+    }
+
+    span {
+        > i {
+            font-size: 53px;
+            cursor: pointer;
+            color: #26a726;
+        }
+    }
+
+    button.btn {
+        &:focus,
+        .focus {
+            outline: none;
+            box-shadow: none;
+        }
+    }
+
+    .mini-game-board {
+
+        display: inline-flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+
+        width: 48px;
+        height: 48px;
+
+        .mini-game-tile {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 16px;
+            height: 16px;
+
+            &.tile_1,
+            &.tile_2,
+            &.tile_4,
+            &.tile_5 {
+                border-right: 1px solid #b4b7ba;
+                border-bottom: 1px solid #b4b7ba;
+            }
+            &.tile_3,
+            &.tile_6 {
+                border-bottom: 1px solid #b4b7ba;
+            }
+            &.tile_7,
+            &.tile_8 {
+                border-right: 1px solid #b4b7ba;
+            }
+            &.tile_9 {
+
+            }
+
+            &.player-icon {
+                font-family: FontAwesome;
+                font-size: 12px;
+                &.x {
+                    &:before {
+                        content: "\f00d";
+                        color: $x-mark-color;
+                    }
+                }
+
+                &.o {
+                    &:before {
+                        content: "\f10c";
+                        color: $o-mark-color;
+                    }
+                }
+            }
+        }
+    }
+}

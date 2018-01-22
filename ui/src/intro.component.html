@@ -1,0 +1,46 @@
+<div class="intro-component">
+    <div class="game-list-container" *ngIf="!newGame">
+
+        <div class="game-list" *ngIf="gameList">
+            <game-card *ngFor="let game of gameList" [game]="game">game.attributes.players</game-card>
+            <game-card [game]="newGameObj"></game-card>
+        </div>
+
+    </div>
+    <div class="player-forms" *ngIf="newGame">
+        <div class="player-form" *ngIf="!usersService.getPlayerOne().name">
+
+            <form class="form-inline">
+                <div class="form-group col-xs-12">
+                    <input #playerOneName class="form-control" type="text" placeholder="player one name"
+                    (keyup.enter)="savePlayerOne(playerOneName.value)">
+                    <div class="button-container">
+                        <button
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="savePlayerOne(playerOneName.value)">Next</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="player-form" *ngIf="!usersService.getPlayerTwo().name && usersService.getPlayerOne().name">
+
+            <form class="form-inline">
+                <div class="form-group col-xs-12">
+                    <input #playerTwoName class="form-control" type="text" placeholder="player two name"
+                    (keyup.enter)="savePlayerTwo(playerTwoName.value)">
+                    <div class="button-container">
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            (click)="savePlayerTwo(playerTwoName.value)">Next</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="player-vs-player" *ngIf="usersService.getPlayerOne().name && usersService.getPlayerTwo().name">
+            <div class="players">{{ usersService.getPlayerOne().name}} vs. {{ usersService.getPlayerTwo().name }}</div>
+            <button type="button" class="btn btn-success" name="button" (click)="startGame()">Play Game</button>
+        </div>
+    </div>
+</div>

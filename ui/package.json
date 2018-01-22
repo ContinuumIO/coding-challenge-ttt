@@ -4,10 +4,12 @@
   "description": "TicTacToe Coding Challenge",
   "main": "webpack.config.js",
   "scripts": {
+    "postinstall": "npm rebuild node-sass --force",
     "build": "npm run webpack",
     "tsc": "tsc --project ui/src",
     "watch": "npm run webpack -- --watch",
     "webpack": "parallel-webpack --config=./webpack.config.js --no-stats",
+    "webpack-dev": "webpack-dev-server -d --open --progress",
     "dev": "concurrently \"python ../run.py\" \"webpack-dev-server -d --open --progress\""
   },
   "author": "Anaconda",

@@ -1,5 +1,3 @@
-import './index.scss';
-
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app.module';
 
@@ -9,6 +7,7 @@ if (module.hot) {
     module.hot.accept();
 }
 
+// This is specific to bootstrapping Angular
 platformBrowserDynamic().bootstrapModule(AppModule)
     .then(platformRef => {
         // hello darkness my old friend
