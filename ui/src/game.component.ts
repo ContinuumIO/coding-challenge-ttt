@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+
+import { GameCompleteDialogComponent } from './game-complete-dialog.component';
 
 import { UsersService } from './users.service';
 import { EventService } from './event.service';
@@ -56,7 +59,8 @@ export class GameComponent implements OnInit {
                 private eventService:EventService,
                 private gameService:GameService,
                 private router:Router,
-                private apiService:ApiService) {
+                private apiService:ApiService,
+                public dialog: MatDialog) {
 
         this.gameComplete = false;
         this.gameWin = false;
@@ -219,6 +223,29 @@ export class GameComponent implements OnInit {
                         ? this.usersService.getPlayerTwo().name
                         : this.usersService.getPlayerOne().name;
         this.gameComplete = this.gameWin = true;
+
+
+        this.openGameCompleteDialog('win');
+    }
+
+    /**
+     * This method opens the Material Dialog component and displays either the
+     * winner's name or that it was a draw.
+     *
+     * @param conclusion String of either 'win' or 'draw'
+     */
+    openGameCompleteDialog(conclusion):void {
+        console.log('openGameCompleteDialog()');
+        let dialogRef = this.dialog.open(GameCompleteDialogComponent, {
+            width: '300px',
+            data: conclusion === 'win' ? { text: this.winner } : { text: 'draw'}
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result === 'playAgain') {
+                this.resetGame();
+            }
+        });
     }
 
     /**
@@ -229,6 +256,7 @@ export class GameComponent implements OnInit {
         this.tiles.forEach((tile, index) => {
             $('.tile_'+(index+1)).addClass('loser');
         });
-        this.gameComplete = this.gameDraw = true;
+        this.gameComplete = true;
+        this.openGameCompleteDialog('draw');
     }
 }

@@ -15,11 +15,3 @@
         (click)="selectTile($event, tile)">
     </div>
 </div>
-<div class="end-of-game-message" *ngIf="gameComplete">
-    <div class="win" *ngIf="gameComplete && gameWin">
-        <span>{{ winner }} WON!</span>
-    </div>
-    <div class="draw" *ngIf="gameComplete && gameDraw">
-        <span>DRAW!</span>
-    </div>
-</div>
