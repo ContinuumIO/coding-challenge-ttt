@@ -1,5 +1,26 @@
 # Developer's Notes:
 
+The Tic Tac Toe challenge application is a one-on-one tac tac toe game that allows the user to choose player names, save completed and in-progress games and restore those games at a later time (within the same session).
+
+I used Miniconda to setup the environment from the supplied `environment.yml` file. The `run.py` file was modified to bypass the ui build trigger and used `webpack-dev-server` to build, bundle and run the application locally.
+
+### Steps to run locally:
+
+1. check out the branch
+2. cd into the `ui/` directory
+3. run `npm install`
+    * You might see some errors regarding python (atleast I did). I hate to say this, but you can ignore them ... or fix them. It's up to you.
+4. run the application with `npm run dev`
+    * This npm task packages up `webpack-dev-server` along with the Tornado app started by `run.py`
+5. Your browser should open to `localhost:3000`. If not, navigate your browser to http://localhost:3000
+6. Once webpack has completed it's bundling, the application will display.
+
+### Technologies
+- Typescript (transpilation with `awesome-typescript-loader` webpack plugin)
+- Angular 5.2.0
+- Webpack 3.10
+- Bootstrap 3.3.5 (SASS)
+- JQuery 3.3.1
 
 
 # Anaconda: TicTacToe Coding Challenge
