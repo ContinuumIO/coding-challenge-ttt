@@ -36,6 +36,11 @@ class GameListHandler(RequestHandler):
 
 class GameByIDHandler(RequestHandler):
 
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Methods", "GET,PUT,POST")
+        self.set_header("Access-Control-Allow-Headers", "Content-Type, User-Agent, X-Requested-With, X-Requested-By, Cache-Control")
+
     def get(self, game_id):
         """Return a game based on its ID"""
         game = _REGISTRY.get(game_id)
