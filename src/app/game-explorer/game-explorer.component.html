@@ -1,21 +1,26 @@
 <div id="game-explorer" class="container">
-    <table id="game-explorer-list" class="table table-striped" *ngIf="games && games.length > 0">
-        <thead>
-            <th scope="col">#</th>
-            <th scope="col">Player X</th>
-            <th scope="col">Player O</th>
-        </thead>
-        <tbody>
-            <tr *ngFor="let game of games; let rowNum = index">
-                <th scope="row">{{rowNum +1}}</th>
-                <td>{{game.attributes.players[0]}}</td>
-                <td>{{game.attributes.players[1]}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div *ngIf="games && games.length > 0">
+        <button type="submit" (click)="goToPlayerSelect()" class="btn btn-primary">Return to Player Select!</button>
+        <table id="game-explorer-list" class="table table-striped">
+            <thead>
+                <th scope="col">#</th>
+                <th scope="col">Player X</th>
+                <th scope="col">Player O</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let game of games; let rowNum = index">
+                    <th scope="row">{{rowNum +1}}</th>
+                    <td>{{game.attributes.players[0]}}</td>
+                    <td>{{game.attributes.players[1]}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <div *ngIf="!games || games.length == 0">
-        <div class="alert alert-warning" role="alert">
-          No games have been recorded yet!
-        </div>
+        <a>
+            <div class="alert alert-warning" role="alert" (click)="goToPlayerSelect()">
+              No games have been recorded yet! Click to return to player selection.
+            </div>
+        </a>
     </div>
 </div>

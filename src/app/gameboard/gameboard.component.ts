@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GameStateService } from '../game-state.service';
 import swal from 'sweetalert2/dist/sweetalert2.all.min.js'
 import { GamesApiService } from '../games-api.service';
-import { Router } from '@angular/router';             // Add this
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'gameboard',
@@ -19,6 +19,10 @@ export class GameboardComponent {
 
   gameExplorer() : void {
      this.router.navigate(['/game-explorer']);
+  }
+
+  goToPlayerSelect() : void {
+      this.gameState.resetPlayers();
   }
 
   startGame() : void {

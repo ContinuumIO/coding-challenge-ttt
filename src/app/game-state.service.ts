@@ -30,6 +30,7 @@ export class GameStateService {
       this.player1 = null;
       this.player2 = null;
       this.playersReady = false;
+      this.turnCount = undefined;
   }
 
   resetBoard() : void {
@@ -82,7 +83,6 @@ export class GameStateService {
               if(response.value) {
                   this.startNewGame(this.player1.name, this.player2.name);
               } else {
-                  this.turnCount = undefined;
                   this.resetPlayers();
               }
           })
