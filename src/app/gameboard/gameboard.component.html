@@ -3,7 +3,7 @@
     <div id="gameboard" class="fill" *ngIf="gameState.playersReady"> <!-- ENCAPSULATES THE BOARD -->
         <button type="submit" (click)="goToPlayerSelect()" class="btn btn-primary">Return to Player Select!</button>
         <button type="submit" (click)="saveGame()" class="btn btn-primary">Save Game</button>
-        <div class="row h-33" *ngFor="let row of gameState.board; let r = index">
+        <div class="row" *ngFor="let row of gameState.board; let r = index">
             <div class="col-4 gb-cell border rounded"
                 [ngClass]="{'x-cell' : gameState.board[r][c]==1,'o-cell' : gameState.board[r][c]==0 }"
                 *ngFor="let cell of row; let c = index"
