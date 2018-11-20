@@ -1,0 +1,34 @@
+<div class="table-container mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
+    <!-- GAME ID Column -->
+    <ng-container matColumnDef="gameId">
+      <th class="header" mat-header-cell *matHeaderCellDef>Game ID</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+
+    <!-- PLAYER ONE NAME Column -->
+
+    <ng-container matColumnDef="playerOneName">
+      <th class="header" mat-header-cell *matHeaderCellDef>Player One Name</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.attributes.players[0] }}
+      </td>
+    </ng-container>
+
+    <!-- PLAYER TWO NAME Column -->
+
+    <ng-container matColumnDef="playerTwoName">
+      <th class="header" mat-header-cell *matHeaderCellDef>Player Two Name</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.attributes.players[0] }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedCols; sticky: true"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedCols"
+      (click)="onGameSelect(row)"
+    ></tr>
+  </table>
+</div>

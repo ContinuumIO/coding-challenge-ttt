@@ -1,0 +1,24 @@
+<div fxLayout="row" fxLayoutWrap fxLayoutAlign="center">
+  <h1>Start a new game by filling out players names</h1>
+</div>
+<div fxLayout="row" fxLayoutWrap fxLayoutAlign="center" fxLayoutGap="20px">
+  <form [formGroup]="newGameForm" (ngSubmit)="createNewGame()">
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Player One Name"
+        formControlName="pOneCtrl"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Player Two Name"
+        formControlName="pTwoCtrl"
+      />
+    </mat-form-field>
+    <button mat-raised-button type="submit" [disabled]="!newGameForm.valid">
+      Start Game
+    </button>
+  </form>
+</div>

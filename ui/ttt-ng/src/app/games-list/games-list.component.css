@@ -1,0 +1,18 @@
+th {
+  padding-top: 10px;
+  background-color: white !important;
+  cursor: auto;
+}
+
+.header {
+  padding: 5px;
+}
+
+.table-container {
+  width: 50%;
+}
+
+tr:hover {
+  background: #f0fff0;
+  cursor: pointer;
+}
