@@ -1,0 +1,28 @@
+<div class="row mb-3" [formGroup]="playersForm">
+  <div class="col justify-content-center">
+    <input type="text" class="form-control" [formControl]="playersForm.at(0)"/>
+  </div>
+  <div class="col justify-content-center">
+    <input type="text" class="form-control" [formControl]="playersForm.at(1)"/>
+  </div>
+</div>
+<div class="row" *ngIf="master.gameOver">
+  <div class="col">
+    <div class="alert alert-danger text-center">
+      <h2>{{ master.winningPlayer }} wins!</h2>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-3" [formGroup]="playersForm">
+  <div class="col justify-content-center">
+    <app-game-board *ngIf="master.gameInProgress || master.gameOver"></app-game-board>
+  </div>
+</div>
+
+<div class="row" *ngIf="!master.gameInProgress">
+  <div class="col text-center">
+    <button type="button" class="btn btn-primary" (click)="onNewGame()">New Game</button>
+  </div>
+</div>
+

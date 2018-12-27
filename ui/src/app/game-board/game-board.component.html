@@ -1,0 +1,8 @@
+<div [formGroup]="board.form">
+  <div class="row" *ngFor="let row of board.asRows">
+    <div class="col justify-content-center align-content-center" *ngFor="let space of row">
+      <app-board-space [formControl]="space" [player]="currentPlayer"
+                       (spaceSelected)="master.turnEnd()"></app-board-space>
+    </div>
+  </div>
+</div>

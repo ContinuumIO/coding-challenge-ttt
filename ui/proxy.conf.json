@@ -1,0 +1,10 @@
+{
+  "/api": {
+      "target": "http://localhost:8080",
+      "pathRewrite": {"^/" : ""},
+      "ignorePath": false,
+      "changeOrigin": true,
+      "cookieDomainRewrite": "localhost",
+      "secure": false
+  }
+}
