@@ -1,4 +1,4 @@
-# Anaconda: TicTacToe Coding Challenge
+# TicTacToe Coding Challenge
 
 Your mission, should you choose to accept it, is to implement a two-player game
 of [Tic-tac-toe](https://en.wikipedia.org/wiki/Tic-tac-toe) in the web
@@ -125,11 +125,6 @@ choose to implement:
 However, please be aware that we'd prefer a more polished implementation to
 more features!
 
-## Submission
-
-When you are ready, please submit your challenge as a pull request
-against this repository.
-
-## Alberto Submission
+## Brief explanation
 
 Created a new ng project under UI (ttt-game) so to run project just cd into ttt-game directory and run ng serve
