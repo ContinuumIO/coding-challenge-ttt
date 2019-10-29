@@ -27,3 +27,4 @@ if __name__ == '__main__':
         build_ui()
 
     server.run(**options.as_dict())
+    server.set_default_headers()

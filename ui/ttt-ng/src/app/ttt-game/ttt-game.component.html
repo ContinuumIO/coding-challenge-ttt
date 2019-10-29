@@ -1,0 +1,28 @@
+<div fxLayout="row" fxLayoutWrap fxLayoutAlign="center">
+  <h1 *ngIf="gameActive">
+    {{ activeGame.attributes.players[activePlayerId] }}'s turn ({{ curSymbol }})
+  </h1>
+  <h1 *ngIf="!gameActive">{{ endGameMsg }}</h1>
+</div>
+
+<div class="game">
+  <mat-grid-list cols="3" rowHeight="1:1">
+    <mat-grid-tile *ngFor="let tile of board; let i = index">
+      <button
+        [disableRipple]="true"
+        [ngStyle]="{
+          backgroundColor: board[i] === WINNING_IDX ? 'black' : 'white'
+        }"
+        [disabled]="board[i] !== null || !gameActive"
+        mat-stroked-button
+        (click)="updateBoard(i)"
+        class="tile"
+      >
+        {{ boardSymbols[i] }}
+      </button>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <div *ngIf="!gameActive">
+    <button mat-button (click)="routeToMenu()">Main Menu</button>
+  </div>
+</div>

@@ -8,19 +8,34 @@ from tornado.web import RequestHandler, Application
 from .game import Game, _REGISTRY
 
 
-class IndexHandler(RequestHandler):
+class BaseHandler(tornado.web.RequestHandler):
+    def set_default_headers(self, *args, **kwargs):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Methods", "GET,PUT,POST")
+        self.set_header("Access-Control-Allow-Headers",
+                        "Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, X-Requested-By, If-Modified-Since, X-File-Name, Cache-Control")
+
+    def options(self, *args, **kwargs):
+        pass
+
+
+class IndexHandler(BaseHandler):
     def get(self):
         self.render("index.html")
 
 
-class GameListHandler(RequestHandler):
+class GameListHandler(BaseHandler):
     def get(self):
+        # self.set_header("Access-Control-Allow-Origin", "*")
         """List all known games"""
         self.write({"data": [g.to_json() for g in _REGISTRY.list()]})
 
     def post(self):
+        # self.set_header("Access-Control-Allow-Origin", "*")
         """Create a new game"""
+        logging.info("game_data1")
         game_data = json.loads(self.request.body.decode('utf-8'))
+        logging.info("game_data")
         game_instance = Game(**game_data)
         _REGISTRY.add(game_instance)
         self.set_status(201)
@@ -28,7 +43,7 @@ class GameListHandler(RequestHandler):
         self.write(game_instance.to_json())
 
 
-class GameByIDHandler(RequestHandler):
+class GameByIDHandler(BaseHandler):
     def get(self, game_id):
         """Return a game based on its ID"""
         game = _REGISTRY.get(game_id)
@@ -39,7 +54,9 @@ class GameByIDHandler(RequestHandler):
 
     def post(self, game_id):
         """Overwrite a game based on its ID"""
+        logging.info("got to here 1")
         game = _REGISTRY.get(game_id)
+        logging.info("got to here 2")
         if not game:
             self.set_status(404)
         else:
