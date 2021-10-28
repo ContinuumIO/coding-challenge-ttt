@@ -61,8 +61,8 @@ def run(port=8080, debug=False, **kwargs):
     app = Application(
         handlers,
         cookie_secret=os.urandom(16),
-        template_path=os.path.join(CURRENT_DIR, 'templates'),
-        static_path=os.path.join(CURRENT_DIR, '..', 'ui', 'static'),
+        template_path=os.path.join(CURRENT_DIR, '..', 'app', 'static'),
+        static_path=os.path.join(CURRENT_DIR, '..', 'app', 'static'),
         xsrf_cookies=False,
         debug=debug)
 
