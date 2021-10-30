@@ -10,3 +10,9 @@ export const symbolToIcon = (symbol: GameSymbol) => {
   if (symbol === null) return '';
   return PlayIcons[symbol];
 };
+
+export enum GameStatus {
+  invalid,
+  initiated,
+  ended
+}

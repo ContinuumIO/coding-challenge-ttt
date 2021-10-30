@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {Player} from '../model/Player';
-import {Game, GameStatus} from '../model/Game';
+import {Game} from '../model/Game';
 import shuffle from 'lodash.shuffle';
-import {GameSymbol} from '../model/utils';
+import {GameStatus, GameSymbol} from '../model/utils';
 import {MatDialog} from '@angular/material/dialog';
 import {FormDialog} from './Setup/form.dialog';
 
@@ -40,7 +40,6 @@ export class AppComponent {
   startGame() {
     this.game.startGame(this.player1, this.player2);
   }
-
 
   openSetupDialog() {
     const dialogRef = this.dialog.open(FormDialog);

@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {Board} from '../../model/Game';
 import {GameSymbol, symbolToIcon} from '../../model/utils';
+import {Board} from '../../model/Board';
 
 @Component({
   selector: 'board',
@@ -25,7 +25,12 @@ export class BoardComponent {
   setTile(index: number) {
     const {x, y} = BoardComponent.indexToCoordinates(index);
 
-    this.board.setField(this.osTurn ? 0 : 1, {x, y});
+    const continuePlaying = this.board.setField(this.osTurn ? 0 : 1, {x, y});
+    if (!continuePlaying) {
+      console.log('FINISH GAME NOW!');
+      return;
+    }
+
     this.osTurn = !this.osTurn;
   }
 

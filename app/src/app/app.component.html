@@ -8,7 +8,7 @@
     <button mat-flat-button *ngSwitchCase="GameStatus.invalid" (click)="openSetupDialog()">
       Create new game
     </button>
-    <button mat-flat-button color="accent" *ngSwitchCase="GameStatus.ended" (click)="startGame()">
+    <button mat-flat-button color="accent" *ngSwitchCase="GameStatus.ended" (click)="game.restart()">
       Play again!
     </button>
     <span *ngSwitchDefault>Playing</span>

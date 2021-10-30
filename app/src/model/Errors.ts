@@ -1,6 +1,12 @@
 export class InvalidMove extends Error {
   constructor() {
-    super('This field is already set');
+    super('This is an invalid move. Either this field is already set or the game is over.');
+  }
+}
+
+export class GameOver extends Error {
+  constructor() {
+    super('This game is over');
   }
 }
 
