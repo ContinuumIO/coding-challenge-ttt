@@ -1,3 +1,4 @@
+$icon-size: 70px;
 .grid {
   height: 500px;
   width: 500px;
@@ -12,8 +13,18 @@
       display: block;
     }
 
-    &:last-child {
-      border: 0;
+    mat-icon {
+      font-size: $icon-size;
+      width: $icon-size;
+      height: $icon-size;
+    }
+
+    &:nth-child(3n) {
+      border-right: 0;
+    }
+
+    &:nth-child(n+7) {
+      border-bottom: 0;
     }
   }
 }

@@ -1,7 +1,6 @@
 <mat-grid-list class="grid" [cols]="board.size" rowHeight="1:1">
   <mat-grid-tile class="tile" *ngFor="let tile of board.tiles; let i=index">
-    <mat-icon *ngIf="tile === 1">close</mat-icon>
-    <mat-icon *ngIf="tile === 0">circle</mat-icon>
+    <mat-icon>{{getIcon(tile)}}</mat-icon>
     <div *ngIf="tile === null" (click)="setTile(i)"></div>
   </mat-grid-tile>
 </mat-grid-list>

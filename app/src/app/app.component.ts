@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Player} from '../model/Player';
 import {Game, GameStatus} from '../model/Game';
 import shuffle from 'lodash.shuffle';
-import {GameSymbol} from '../model/types';
+import {GameSymbol} from '../model/utils';
 import {MatDialog} from '@angular/material/dialog';
 import {FormDialog} from './Setup/form.dialog';
 
@@ -13,7 +13,7 @@ import {FormDialog} from './Setup/form.dialog';
 })
 export class AppComponent {
   GameStatus = GameStatus;
-  title = 'app';
+  title = 'Tic Tac Toe';
 
   player1?: Player;
   player2?: Player;
@@ -41,9 +41,6 @@ export class AppComponent {
     this.game.startGame(this.player1, this.player2);
   }
 
-  get circleFirst(): boolean {
-    return this.player1?.symbol === 0;
-  }
 
   openSetupDialog() {
     const dialogRef = this.dialog.open(FormDialog);

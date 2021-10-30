@@ -1,7 +1,3 @@
-export const EmptyField = null;
-export type GameSymbol = 0 | 1 | null
-export type Coordinate = { x: number, y: number }
-
 export class InvalidMove extends Error {
   constructor() {
     super('This field is already set');

@@ -1,10 +1,10 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="toolbar">
   <div *ngIf="player1" fxLayoutAlign="center center" fxLayoutGap="4px">
     <mat-icon aria-hidden="false" aria-label="Player 1">{{player1.icon}}</mat-icon>
     <span>{{player1.username}}</span>
   </div>
   <div class="spacer"></div>
-  <div [ngSwitch]="game.status">
+  <div [ngSwitch]="game.status" class="title">
     <button mat-flat-button *ngSwitchCase="GameStatus.invalid" (click)="openSetupDialog()">
       Create new game
     </button>
@@ -18,9 +18,8 @@
     <mat-icon aria-hidden="false" aria-label="Player 2">{{player2.icon}}</mat-icon>
     <span>{{player2.username}}</span>
   </div>
-
 </mat-toolbar>
 
 <div class="content" role="main">
-  <board *ngIf="game.board" [board]="game.board" [circleFirst]="circleFirst"></board>
+  <board *ngIf="game.board && player1" [board]="game.board" [startWithO]="player1.symbol === 0"></board>
 </div>

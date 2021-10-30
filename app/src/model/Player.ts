@@ -1,12 +1,12 @@
 import {Game} from './Game';
-import {GameSymbol} from './types';
+import {GameSymbol, symbolToIcon} from './utils';
 
 export class Player {
   constructor(public symbol: GameSymbol, public username: string) {
   }
 
   get icon(): string {
-    return this.symbol === 0 ? 'circle' : 'close';
+    return symbolToIcon(this.symbol);
   }
 
   get games(): Game[] {

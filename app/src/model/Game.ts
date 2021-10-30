@@ -1,7 +1,8 @@
 import {Player} from './Player';
-import {Coordinate, EmptyField, GameNotStarted, GameSymbol, InvalidMove, InvalidPlayerNumber} from './types';
+import {Coordinate, EmptyField, GameSymbol} from './utils';
 import {v4 as uuidV4} from 'uuid';
 import flatten from 'lodash.flatten';
+import {GameNotStarted, InvalidMove, InvalidPlayerNumber} from './Errors';
 
 export enum GameStatus {
   invalid,
@@ -70,5 +71,17 @@ export class Game {
       throw new GameNotStarted();
     }
     this.board.setField(player.symbol, coordinates);
+  }
+
+  sendToServer() {
+    const parsedGame = {
+      type: this.type,
+      id: this.id,
+      attributes: {
+        players: this._players.map(p => p.username),
+        board: this.board?.tiles,
+      },
+    };
+    console.log(parsedGame);
   }
 }
