@@ -22,5 +22,5 @@
 
 <div class="content" role="main">
   <board *ngIf="game.board && player1" [board]="game.board" [startWithO]="player1.symbol === 0"
-  (updated)="game.update($event)"></board>
+  (updated)="update($event)"></board>
 </div>

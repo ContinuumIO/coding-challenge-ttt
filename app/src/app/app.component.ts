@@ -6,6 +6,7 @@ import {GameStatus, GameSymbol} from '../model/utils';
 import {MatDialog} from '@angular/material/dialog';
 import {FormDialog} from './Setup/form.dialog';
 import axios from 'axios';
+import {WinnerDialog} from './Winner/winner.dialog';
 
 axios.defaults.baseURL = 'http://localhost:8080/api';
 
@@ -25,11 +26,9 @@ export class AppComponent {
 
   symbolArray: GameSymbol[] = shuffle([0, 1]);
 
+  error?: string;
+
   constructor(public dialog: MatDialog) {
-    // TODO: Remove this, only for testing!
-    this.setPlayer1('a');
-    this.setPlayer2('b');
-    this.startGame();
   }
 
   setPlayer1(username: string) {
@@ -40,8 +39,8 @@ export class AppComponent {
     this.player2 = new Player(this.symbolArray[1], username);
   }
 
-  async startGame() {
-    await this.game.startGame(this.player1, this.player2);
+  startGame() {
+    this.game.startGame(this.player1, this.player2).then(console.log);
   }
 
   openSetupDialog() {
@@ -52,5 +51,16 @@ export class AppComponent {
       this.setPlayer2(result.player2);
       this.startGame();
     });
+  }
+
+  update(continuePlaying: boolean) {
+    this.game.updateRemote();
+    if (!continuePlaying) {
+      this.dialog.open(WinnerDialog, {
+        data: {
+          winner: this.game.winner,
+        },
+      });
+    }
   }
 }

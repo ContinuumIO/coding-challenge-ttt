@@ -14,12 +14,14 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatListModule} from '@angular/material/list';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {BoardComponent} from './Board/board.component';
+import {WinnerDialog} from './Winner/winner.dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormDialog,
     BoardComponent,
+    WinnerDialog,
   ],
   imports: [
     BrowserModule,

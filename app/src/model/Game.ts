@@ -10,7 +10,6 @@ export class Game {
   board?: Board;
   private _players: Player[] = [];
 
-
   async startGame(player1?: Player, player2?: Player): Promise<void> {
     if (!player1 || !player2) {
       throw new InvalidPlayerNumber();
@@ -28,12 +27,6 @@ export class Game {
     await this.startGame(...this._players);
   }
 
-  update(continuePlaying: boolean) {
-    console.log(continuePlaying);
-    console.log('Update!');
-    this.updateRemote();
-  }
-
   updateRemote() {
     axios.post(`/games/${this.id}`, this.parse()).then(response => {
       console.log('Saved Game', response);
@@ -46,6 +39,15 @@ export class Game {
 
   get playerNames() {
     return this._players.map(p => p.username);
+  }
+
+  get winner() {
+    console.log('Calculate winner', this.board?.winner);
+    if (this.board && this.board.winner !== undefined) {
+      const symbol = this.board.winner;
+      return this._players.find((p) => p.symbol === symbol);
+    }
+    return undefined;
   }
 
   parse() {
