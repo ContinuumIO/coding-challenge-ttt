@@ -5,6 +5,9 @@ import shuffle from 'lodash.shuffle';
 import {GameStatus, GameSymbol} from '../model/utils';
 import {MatDialog} from '@angular/material/dialog';
 import {FormDialog} from './Setup/form.dialog';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'http://localhost:8080/api';
 
 @Component({
   selector: 'app-root',
@@ -37,8 +40,8 @@ export class AppComponent {
     this.player2 = new Player(this.symbolArray[1], username);
   }
 
-  startGame() {
-    this.game.startGame(this.player1, this.player2);
+  async startGame() {
+    await this.game.startGame(this.player1, this.player2);
   }
 
   openSetupDialog() {

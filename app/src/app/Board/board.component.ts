@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {GameSymbol, symbolToIcon} from '../../model/utils';
 import {Board} from '../../model/Board';
 
@@ -11,6 +11,7 @@ export class BoardComponent {
   @Input('startWithO') osTurn!: boolean;
   @Input() board!: Board;
 
+  @Output() updated = new EventEmitter<boolean>();
 
   // Examples: 2 -> x = 0; y = 2
   // 3 -> x = 0; y = 0
@@ -26,12 +27,12 @@ export class BoardComponent {
     const {x, y} = BoardComponent.indexToCoordinates(index);
 
     const continuePlaying = this.board.setField(this.osTurn ? 0 : 1, {x, y});
-    if (!continuePlaying) {
-      console.log('FINISH GAME NOW!');
-      return;
-    }
 
-    this.osTurn = !this.osTurn;
+    this.updated.emit(continuePlaying);
+
+    if (continuePlaying) {
+      this.osTurn = !this.osTurn;
+    }
   }
 
   getIcon(tile: GameSymbol) {

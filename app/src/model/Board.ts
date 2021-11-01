@@ -39,7 +39,7 @@ export class Board {
 
     const hasEnded = this.checkGameOver();
     if (hasEnded) {
-      this.status = GameStatus.ended;
+      this.status= GameStatus.ended;
       return false;
     }
     return true;
