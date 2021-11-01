@@ -49,6 +49,10 @@ export class Game {
     });
   }
 
+  getPlayer(index: number) {
+    return this._players[index];
+  }
+
   get status() {
     return this.board?.status || GameStatus.invalid;
   }
@@ -80,4 +84,5 @@ export class Game {
     const board = new Board(gameJson.attributes.board);
     return new Game(gameJson.id, gameJson.type, [player1, player2], board);
   }
+
 }

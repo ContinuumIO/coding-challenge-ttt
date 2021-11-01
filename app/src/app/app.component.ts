@@ -17,42 +17,38 @@ axios.defaults.baseURL = 'http://localhost:8080/api';
 })
 export class AppComponent {
   GameStatus = GameStatus;
-  title = 'Tic Tac Toe';
+  symbolArray: PlayerSymbol[] = shuffle([0, 1]);
+
   showHistory = false;
 
-  player1?: Player;
-  player2?: Player;
-
   game: Game = new Game();
-
-  symbolArray: PlayerSymbol[] = shuffle([0, 1]);
 
   error?: string;
   history: Game[] = [];
 
   constructor(public dialog: MatDialog) {
-    this.toggleHistory();
   }
 
-  setPlayer1(username: string) {
-    this.player1 = new Player(this.symbolArray[0], username);
+  get player1() {
+    return this.game.getPlayer(0);
   }
 
-  setPlayer2(username: string) {
-    this.player2 = new Player(this.symbolArray[1], username);
+  get player2() {
+    return this.game.getPlayer(1);
   }
 
-  startGame() {
-    this.game.startGame(this.player1, this.player2).then(console.log);
+  startGame(player1: Player, player2: Player) {
+    this.showHistory = false;
+    this.game.startGame(player1, player2).then(console.log);
   }
 
   openSetupDialog() {
     const dialogRef = this.dialog.open(FormDialog);
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.setPlayer1(result.player1);
-      this.setPlayer2(result.player2);
-      this.startGame();
+    dialogRef.afterClosed().subscribe(({player1, player2}) => {
+      const p1 = new Player(this.symbolArray[0], player1);
+      const p2 = new Player(this.symbolArray[1], player2);
+      this.startGame(p1, p2);
     });
   }
 
@@ -73,5 +69,13 @@ export class AppComponent {
       const {data: response} = await axios.get('/games');
       this.history = response.data.map(Game.fromJson);
     }
+  }
+
+  restoreGame(gameToRestore: Game) {
+    this.game = gameToRestore;
+  }
+
+  exitGame() {
+    this.game = new Game();
   }
 }

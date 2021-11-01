@@ -21,15 +21,19 @@
 </mat-toolbar>
 
 <div class="content" role="main">
-  <board *ngIf="game.board && player1" [board]="game.board" [startWithO]="player1.symbol === 0"
-         (updated)="update($event)"></board>
+  <div *ngIf="game.board && player1" fxLayout="column" fxLayoutGap="24px" fxLayoutAlign="center center">
+    <board [board]="game.board" [startWithO]="player1.symbol === 0"
+           (updated)="update($event)"></board>
+    <button mat-flat-button color="warn" (click)="exitGame()">Exit game</button>
+  </div>
+
   <div *ngIf="!game.board" class="history">
     <button mat-flat-button color="primary" (click)="toggleHistory()">
       {{showHistory ? 'Hide' : 'Show'}} game history
     </button>
     <div *ngIf="showHistory && history.length > 0" fxLayout="row wrap" fxLayoutGap="12px grid"
          fxLayoutAlign="space-around center">
-      <game-tile fxFlex="33%" *ngFor="let item of history" [game]="item"></game-tile>
+      <game-tile fxFlex="33%" *ngFor="let item of history" [game]="item" (onView)="restoreGame($event)"></game-tile>
     </div>
     <div *ngIf="showHistory && history.length === 0">
       No games found

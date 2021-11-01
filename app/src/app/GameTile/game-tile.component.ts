@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Game} from '../../model/Game';
 import {GameStatus} from '../../model/utils';
 
@@ -7,13 +7,12 @@ import {GameStatus} from '../../model/utils';
   templateUrl: './game-tile.component.html',
   styleUrls: ['./game-tile.component.scss'],
 })
-export class GameTileComponent implements OnInit {
+export class GameTileComponent {
   @Input() game!: Game;
 
-  constructor() {
-  }
+  @Output() onView = new EventEmitter<Game>();
 
-  ngOnInit(): void {
+  constructor() {
   }
 
   get title(): string {
@@ -36,7 +35,7 @@ export class GameTileComponent implements OnInit {
     return 'Result: Tied';
   }
 
-  restoreGame() {
-
+  view() {
+    this.onView.emit(this.game);
   }
 }
