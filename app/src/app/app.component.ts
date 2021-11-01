@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Player} from '../model/Player';
 import {Game} from '../model/Game';
 import shuffle from 'lodash.shuffle';
-import {GameStatus, GameSymbol} from '../model/utils';
+import {GameStatus, PlayerSymbol} from '../model/utils';
 import {MatDialog} from '@angular/material/dialog';
 import {FormDialog} from './Setup/form.dialog';
 import axios from 'axios';
@@ -18,17 +18,20 @@ axios.defaults.baseURL = 'http://localhost:8080/api';
 export class AppComponent {
   GameStatus = GameStatus;
   title = 'Tic Tac Toe';
+  showHistory = false;
 
   player1?: Player;
   player2?: Player;
 
   game: Game = new Game();
 
-  symbolArray: GameSymbol[] = shuffle([0, 1]);
+  symbolArray: PlayerSymbol[] = shuffle([0, 1]);
 
   error?: string;
+  history: Game[] = [];
 
   constructor(public dialog: MatDialog) {
+    this.toggleHistory();
   }
 
   setPlayer1(username: string) {
@@ -61,6 +64,14 @@ export class AppComponent {
           winner: this.game.winner,
         },
       });
+    }
+  }
+
+  async toggleHistory() {
+    this.showHistory = !this.showHistory;
+    if (this.showHistory) {
+      const {data: response} = await axios.get('/games');
+      this.history = response.data.map(Game.fromJson);
     }
   }
 }

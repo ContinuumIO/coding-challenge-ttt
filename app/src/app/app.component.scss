@@ -65,6 +65,15 @@ p {
   align-items: center;
 }
 
+.history {
+  width: 80%;
+  text-align: center;
+
+  > button {
+    margin-bottom: 24px
+  }
+}
+
 svg.material-icons {
   height: 24px;
   width: auto;

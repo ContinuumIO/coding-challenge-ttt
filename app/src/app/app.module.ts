@@ -15,6 +15,8 @@ import {MatListModule} from '@angular/material/list';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {BoardComponent} from './Board/board.component';
 import {WinnerDialog} from './Winner/winner.dialog';
+import {GameTileComponent} from './GameTile/game-tile.component';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import {WinnerDialog} from './Winner/winner.dialog';
     FormDialog,
     BoardComponent,
     WinnerDialog,
+    GameTileComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import {WinnerDialog} from './Winner/winner.dialog';
     FormsModule,
     MatGridListModule,
     MatListModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

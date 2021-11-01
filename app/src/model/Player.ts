@@ -1,8 +1,8 @@
 import {Game} from './Game';
-import {GameSymbol, symbolToIcon} from './utils';
+import {PlayerSymbol, symbolToIcon} from './utils';
 
 export class Player {
-  constructor(public symbol: GameSymbol, public username: string) {
+  constructor(public symbol: PlayerSymbol, public username: string) {
   }
 
   get icon(): string {

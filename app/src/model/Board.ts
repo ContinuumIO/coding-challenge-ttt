@@ -1,24 +1,31 @@
-import {Coordinate, EmptyField, GameStatus, GameSymbol} from './utils';
+import {Coordinate, EmptyField, GameStatus, TileSymbol} from './utils';
 import flatten from 'lodash.flatten';
+import chunk from 'lodash.chunk';
 import {InvalidMove} from './Errors';
 
 export class Board {
-  private readonly _board: GameSymbol[][];
+  private readonly _board: TileSymbol[][];
   status: GameStatus = GameStatus.initiated;
-  winner?: GameSymbol;
+  winner?: TileSymbol;
 
-  constructor() {
-    this._board = [];
-    this._board.push([EmptyField, EmptyField, EmptyField]);
-    this._board.push([EmptyField, EmptyField, EmptyField]);
-    this._board.push([EmptyField, EmptyField, EmptyField]);
+  constructor(symbols?: TileSymbol[]) {
+    if (symbols) {
+      this._board = chunk(symbols, 3);
+      const hasEnded = this.checkGameOver();
+      this.status = hasEnded ? GameStatus.ended : GameStatus.initiated;
+    } else {
+      this._board = [];
+      this._board.push([EmptyField, EmptyField, EmptyField]);
+      this._board.push([EmptyField, EmptyField, EmptyField]);
+      this._board.push([EmptyField, EmptyField, EmptyField]);
+    }
   }
 
-  get rows(): GameSymbol[][] {
+  get rows(): TileSymbol[][] {
     return this._board;
   }
 
-  get tiles(): GameSymbol[] {
+  get tiles(): TileSymbol[] {
     return flatten(this._board);
   }
 
@@ -26,11 +33,11 @@ export class Board {
     return 3;
   }
 
-  getField(coordinates: Coordinate): GameSymbol {
+  getField(coordinates: Coordinate): TileSymbol {
     return this._board[coordinates.x][coordinates.y];
   }
 
-  setField(symbol: GameSymbol, coordinates: Coordinate): boolean {
+  setField(symbol: TileSymbol, coordinates: Coordinate): boolean {
     if (this.status !== GameStatus.initiated || this._board[coordinates.x][coordinates.y] !== EmptyField) {
       throw new InvalidMove();
     }
@@ -39,7 +46,7 @@ export class Board {
 
     const hasEnded = this.checkGameOver();
     if (hasEnded) {
-      this.status= GameStatus.ended;
+      this.status = GameStatus.ended;
       return false;
     }
     return true;

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {GameSymbol, symbolToIcon} from '../../model/utils';
+import {TileSymbol, symbolToIcon} from '../../model/utils';
 import {Board} from '../../model/Board';
 
 @Component({
@@ -35,7 +35,7 @@ export class BoardComponent {
     }
   }
 
-  getIcon(tile: GameSymbol) {
+  getIcon(tile: TileSymbol) {
     return symbolToIcon(tile);
   }
 }
