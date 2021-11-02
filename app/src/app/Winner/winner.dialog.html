@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Game over!</h1>
+<div mat-dialog-content fxLayout="column" fxLayoutAlign="start" fxLayoutGap="12px">
+  <div *ngIf="data.winner" fxLayoutAlign="center center" fxLayoutGap="4px">
+    <mat-icon>{{data.winner.icon}}</mat-icon>
+    <span>{{data.winner.username}} wins!</span>
+  </div>
+  <p *ngIf="!data.winner">It's a tie</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="primary" [mat-dialog-close]="data">Close</button>
+</div>

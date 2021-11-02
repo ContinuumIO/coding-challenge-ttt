@@ -1,0 +1,42 @@
+<mat-toolbar color="primary" class="toolbar">
+  <div *ngIf="player1" fxLayoutAlign="center center" fxLayoutGap="4px">
+    <mat-icon aria-hidden="false" aria-label="Player 1">{{player1.icon}}</mat-icon>
+    <span>{{player1.username}}</span>
+  </div>
+  <div class="spacer"></div>
+  <div [ngSwitch]="game.status" class="title">
+    <button mat-flat-button *ngSwitchCase="GameStatus.invalid" (click)="openSetupDialog()">
+      Create new game
+    </button>
+    <button mat-flat-button color="accent" *ngSwitchCase="GameStatus.ended" (click)="game.restart()">
+      Play again!
+    </button>
+    <span *ngSwitchDefault>Playing</span>
+  </div>
+  <div class="spacer"></div>
+  <div *ngIf="player2" fxLayoutAlign="center center" fxLayoutGap="4px">
+    <mat-icon aria-hidden="false" aria-label="Player 2">{{player2.icon}}</mat-icon>
+    <span>{{player2.username}}</span>
+  </div>
+</mat-toolbar>
+
+<div class="content" role="main">
+  <div *ngIf="game.board && player1" fxLayout="column" fxLayoutGap="24px" fxLayoutAlign="center center">
+    <board [board]="game.board" [startWithO]="player1.symbol === 0"
+           (updated)="update($event)"></board>
+    <button mat-flat-button color="warn" (click)="exitGame()">Exit game</button>
+  </div>
+
+  <div *ngIf="!game.board" class="history">
+    <button mat-flat-button color="primary" (click)="toggleHistory()">
+      {{showHistory ? 'Hide' : 'Show'}} game history
+    </button>
+    <div *ngIf="showHistory && history.length > 0" fxLayout="row wrap" fxLayoutGap="12px grid"
+         fxLayoutAlign="space-around center">
+      <game-tile fxFlex="33%" *ngFor="let item of history" [game]="item" (onView)="restoreGame($event)"></game-tile>
+    </div>
+    <div *ngIf="showHistory && history.length === 0">
+      No games found
+    </div>
+  </div>
+</div>

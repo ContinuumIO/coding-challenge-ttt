@@ -1,0 +1,30 @@
+$icon-size: 70px;
+.grid {
+  height: 500px;
+  width: 500px;
+
+  .tile {
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+
+    div {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    mat-icon {
+      font-size: $icon-size;
+      width: $icon-size;
+      height: $icon-size;
+    }
+
+    &:nth-child(3n) {
+      border-right: 0;
+    }
+
+    &:nth-child(n+7) {
+      border-bottom: 0;
+    }
+  }
+}

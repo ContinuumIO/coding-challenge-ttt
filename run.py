@@ -10,9 +10,9 @@ from backend import server
 def build_ui():
     """Build the front-end assets using the `npm` toolchain"""
     previous_dir = os.getcwd()
-    os.chdir(os.path.join(os.path.dirname(__file__), "ui"))
+    os.chdir(os.path.join(os.path.dirname(__file__), "app"))
     logging.info("Building UI assets")
-    subprocess.call(["npm", "run", "build"], shell=True)
+    subprocess.call(["npm run build"], shell=True)
     os.chdir(previous_dir)
 
 

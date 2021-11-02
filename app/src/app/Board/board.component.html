@@ -1,0 +1,6 @@
+<mat-grid-list class="grid" [cols]="board.size" rowHeight="1:1" fxLayoutAlign="center start">
+  <mat-grid-tile class="tile" *ngFor="let tile of board.tiles; let i=index">
+    <mat-icon>{{getIcon(tile)}}</mat-icon>
+    <div *ngIf="tile === null" (click)="setTile(i)"></div>
+  </mat-grid-tile>
+</mat-grid-list>
