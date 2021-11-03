@@ -8,12 +8,25 @@ from tornado.web import RequestHandler, Application
 from .game import Game, _REGISTRY
 
 
-class IndexHandler(RequestHandler):
+class IndexHandler(RequestHandler):  
     def get(self):
         self.render("index.html")
 
+class BaseHandler(RequestHandler):
+    # to enable CORS
+    def set_default_headers(self):
+        self.set_header("Content-Type", "application/json")
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", "content-type")
+        self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PATCH, PUT')
+        
+    def options(self):
+        # no body
+        self.set_status(204)
+        self.finish()
 
-class GameListHandler(RequestHandler):
+
+class GameListHandler(BaseHandler):
     def get(self):
         """List all known games"""
         self.write({"data": [g.to_json() for g in _REGISTRY.list()]})
@@ -28,7 +41,7 @@ class GameListHandler(RequestHandler):
         self.write(game_instance.to_json())
 
 
-class GameByIDHandler(RequestHandler):
+class GameByIDHandler(BaseHandler):    
     def get(self, game_id):
         """Return a game based on its ID"""
         game = _REGISTRY.get(game_id)
