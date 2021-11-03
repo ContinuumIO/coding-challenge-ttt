@@ -1,0 +1,23 @@
+@import "../../common/styles/variables.scss";
+
+.welcome {
+  .formfield {
+    font-size: $font-size-l;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .error-message {
+    background-color: #ffdf00;
+    color: red;
+    font-size: $font-size-s;
+    font-weight: 500;
+    display: inline-block;
+    padding: 2px 4px;
+  }
+
+  .start-button-container {
+    display: block;
+    margin-top: 10px;
+  }
+}
