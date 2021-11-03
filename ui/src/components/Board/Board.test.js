@@ -31,7 +31,7 @@ describe("Board", () => {
     fireEvent.click(square9);
     expect(square9).toHaveTextContent("X");
 
-    expect(screen.getByTestId("status")).toHaveTextContent("Winner: X");
+    expect(screen.getByTestId("status")).toHaveTextContent("X WON!!!!");
   });
 
   test("check when the game is a draw", () => {
