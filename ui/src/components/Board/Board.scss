@@ -1,0 +1,91 @@
+@import "../../common/styles/variables.scss";
+
+.game {
+  margin: 20px;
+  min-height: 260px;
+}
+
+.game ol,
+.game ul {
+  padding-left: 30px;
+}
+
+.squares {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 420px;
+}
+
+.restart {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.square {
+  background: #fff;
+  color: #0336ff;
+  border: 5px solid #e6dfac;
+  font-size: 64px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 140px;
+  width: 140px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  transition: all 1s;
+  border-radius: 0;
+
+  &:focus {
+    outline: none;
+    background: #ffdf00;
+  }
+  &.winner-square {
+    outline: none;
+    background: #b3ff59;
+  }
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+}
+
+.gameInfo {
+  margin-left: 20px;
+  min-width: 190px;
+}
+.status {
+  font-size: $font-size-l;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.winner {
+  font-size: $font-size-xl;
+  font-weight: bold;
+  color: #b3ff59;
+}
+
+.blink-me {
+  animation: blinker 1s linear infinite;
+}
+
+.game-saved-notification {
+  margin-top: 20px;
+  color: green;
+  font-size: $font-size-m;
+  font-weight: 500;
+  background-color: #fff;
+  padding: 3px 15px;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
